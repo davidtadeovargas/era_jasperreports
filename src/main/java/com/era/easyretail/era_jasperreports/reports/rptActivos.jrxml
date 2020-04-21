@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0f11a949-f1be-495e-827a-d0312e360ede">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUCUR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LOG" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ZONA" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="RESP" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CLAS" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idempresa" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SERIE" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FECH" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT referencia,descrip,zona,sucursal,clasificacion,responsable,serie FROM ACTIVOS
+WHERE idempresa =$P{idempresa}
+AND CASE WHEN '$P!{CLAS}'= '' THEN clasificacion = clasificacion ELSE clasificacion =  '$P!{CLAS}' END
+AND CASE WHEN '$P!{RESP}'= '' THEN responsable = responsable ELSE responsable =  '$P!{RESP}' END
+AND CASE WHEN '$P!{ZONA}'= '' THEN zona = zona ELSE zona =  '$P!{ZONA}' END
+AND CASE WHEN '$P!{SUCUR}'= '' THEN sucursal = sucursal ELSE sucursal =  '$P!{SUCUR}' END
+AND CASE WHEN '$P!{SERIE}'= '' THEN serie = serie ELSE serie =  '$P!{SERIE}' END]]>
+	</queryString>
+	<field name="referencia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descrip" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="zona" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sucursal" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="clasificacion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="responsable" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="serie" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="206" y="18" width="131" height="47" forecolor="#009999" uuid="397dd40e-cbdb-4d43-9fd7-48b6d2942ad4"/>
+				<textElement>
+					<font size="30" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Activos]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="44" height="36" uuid="1fa9dbf6-9a61-419a-a944-56afa1c28b68"/>
+				<imageExpression><![CDATA[$P{LOG}]]></imageExpression>
+			</image>
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement x="74" y="45" width="100" height="20" uuid="db92f3c5-6258-4aaf-8583-59b3c445d2d7"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="19" y="45" width="55" height="20" uuid="b7edb14d-3584-45fc-8914-737253a22de9"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="23" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="0" width="40" height="20" uuid="0690c6a4-4233-4acc-88dd-b48157c4b4e6"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="418" y="0" width="80" height="20" uuid="0c269de4-8b32-4ed0-9cad-a6eb83159cdf"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pag "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="44" height="20" forecolor="#3333FF" uuid="a72b72ab-b6b2-4c8a-bf9f-3bc4fa1acd7e"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Serie]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="44" y="0" width="93" height="20" forecolor="#3333FF" uuid="75764ed1-5997-4f21-be3b-4f34b90142e2"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[# Referencia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="137" y="0" width="102" height="20" forecolor="#3333FF" uuid="eb9cbb11-b4f4-410c-8635-d7aa2c152cf2"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="239" y="0" width="79" height="20" forecolor="#3333FF" uuid="06c95c23-1617-4ee5-adff-e2da1d47a9e2"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Zona]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="318" y="0" width="62" height="20" forecolor="#3333FF" uuid="6216988e-3456-40ca-afb4-d24fb983dd26"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sucursal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="0" width="85" height="20" forecolor="#3333FF" uuid="42aa8061-5b7d-45f5-b79f-e97fa925f13d"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Clasificación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="465" y="0" width="90" height="20" forecolor="#3333FF" uuid="d533a3af-57f6-4ec2-8721-588b2832732a"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Responsable]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="44" y="0" width="93" height="20" uuid="274d6c55-8fab-4aed-b5d1-2b01707782c8"/>
+				<textFieldExpression><![CDATA[$F{referencia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="137" y="0" width="102" height="20" uuid="55060247-82a1-4049-83cc-967ed374cea8"/>
+				<textFieldExpression><![CDATA[$F{descrip}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="237" y="0" width="81" height="20" uuid="cce16dfc-6081-4280-aeca-bf03ea270c1d"/>
+				<textFieldExpression><![CDATA[$F{zona}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="318" y="0" width="62" height="20" uuid="298295aa-6d4e-4ae5-8299-bc2df2aba2aa"/>
+				<textFieldExpression><![CDATA[$F{sucursal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="0" width="85" height="20" uuid="49625c5b-3b8c-4554-9c0c-a510d9d1d414"/>
+				<textFieldExpression><![CDATA[$F{clasificacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="465" y="0" width="90" height="20" uuid="4b59d763-4e83-4584-9fbb-62a17f502aa7"/>
+				<textFieldExpression><![CDATA[$F{responsable}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="44" height="20" uuid="7e7dc106-dff5-4dd2-85c7-c237795e9592"/>
+				<textFieldExpression><![CDATA[$F{serie}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="27" splitType="Stretch">
+			<textField>
+				<reportElement x="106" y="0" width="112" height="20" uuid="906390a1-a948-406f-bd37-63c69535b418"/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="106" height="20" uuid="c800956e-86ea-499a-921a-6758da71aef3"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Activos:]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="39" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

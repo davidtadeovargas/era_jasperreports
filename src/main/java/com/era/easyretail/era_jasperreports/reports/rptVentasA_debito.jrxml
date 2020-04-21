@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptVentasA_entradas" language="groovy" pageWidth="752" pageHeight="572" orientation="Landscape" columnWidth="752" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="90535239-904a-4260-be22-4835e4645084">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="IdEmpresa" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Finicio" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Ffin" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Serie" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="bSeries" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select dd.Documento, dd.Serie, sum(dd.Total) Total from
+(SELECT Documento, Serie, sum(Total) Total FROM 
+(select 'Deposito Dia' Documento, ifnull(noser,'$P!{bSeries}') Serie, ifnull(sum(tot), 0) Total from cxc where estado = 'CO'
+and falt > '$P!{Finicio} 00:00:00' and falt < adddate('$P!{Ffin} 00:00:00', interval 1 day)
+and cxc.concep = 'FAC' and case when '$P!{bSeries}' <> '' then noser in ($P!{Serie}) else noser = noser end and idempresa = '$P!{IdEmpresa}'
+group by Documento, Serie
+UNION ALL SELECT 'Deposito Dia' Documento, '$P!{bSeries}' Serie, 0 Total)d 
+UNION ALL 
+SELECT Documento, Serie, sum(Total) Total FROM ( 
+select 'Deposito Dia' Documento, ifnull(serie,'$P!{bSeries}') Serie, ifnull(sum(importe),0) Total from documentos_pago where 
+fecha_documento > '$P!{Finicio} 00:00:00' and fecha_documento < adddate('$P!{Ffin} 00:00:00', interval 1 day)
+and CASE WHEN '$P!{bSeries}' <> '' THEN serie in ($P!{Serie}) ELSE serie = serie END 
+and idempresa = '$P!{IdEmpresa}' and estado <> 'CA' and concepto <> 'DESC' group by Documento, Serie
+UNION ALL
+SELECT 'Deposito Dia' Documento, '$P!{bSeries}' Serie, 0 Total)p)dd;]]>
+	</queryString>
+	<field name="Documento" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Serie" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Total" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="vTotal" class="java.math.BigDecimal" resetType="None" calculation="Sum">
+		<variableExpression><![CDATA[$F{Total}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="110" height="20" uuid="d7a4c86f-ba99-417d-848a-0e3a15a22a77"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Documento}+ ":"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="0" width="100" height="20" uuid="dab24c62-f6bd-4251-8e4b-66e5950d3fd7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Serie}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="223" y="0" width="100" height="20" uuid="1c6eccc6-a2f7-4432-a7f1-f68675f51cb6"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

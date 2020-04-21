@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="555" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" whenResourceMissingType="Empty" uuid="9704ac55-57bb-4424-9622-f93114b4b088">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idempresa" class="java.lang.String"/>
+	<parameter name="PROD" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ALMA" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="JERA" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="MED" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="UBIAD" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ANAQ" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LUG" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LIN" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="MARC" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="IMP" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CLAS" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="EXIST" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT unid, existalma.PROD, descrip, existalma.EXIST AS exist, existalma.ALMA, almas.ALMADESCRIP FROM existalma LEFT OUTER JOIN prods ON prods.PROD = existalma.PROD LEFT OUTER JOIN almas ON almas.ALMA = existalma.ALMA WHERE existalma.idempresa = $P{idempresa} AND almas.idempresa = $P{idempresa} AND prods.idempresa = $P{idempresa} AND CASE WHEN '$P!{ALMA}' = '' THEN existalma.ALMA  = existalma.ALMA ELSE existalma.ALMA = '$P!{ALMA}' END AND CASE WHEN '$P!{PROD}' = '' THEN existalma.PROD  = existalma.PROD ELSE existalma.PROD = '$P!{PROD}' END AND CASE WHEN '$P!{JERA}' = '' THEN clasjera  = clasjera ELSE clasjera = '$P!{JERA}' END AND CASE WHEN '$P!{MED}' = '' THEN codmed = codmed ELSE codmed = '$P!{MED}' END AND CASE WHEN '$P!{UBIAD}' = '' THEN prods.CODUBI = prods.CODUBI ELSE prods.CODUBI = '$P!{UBIAD}' END AND CASE WHEN '$P!{ANAQ}' = '' THEN prods.ANAQ = prods.ANAQ ELSE prods.ANAQ = '$P!{ANAQ}' END AND CASE WHEN '$P!{LUG}' = '' THEN lug = lug ELSE lug = '$P!{LUG}' END AND CASE WHEN '$P!{LIN}' = '' THEN lin = lin ELSE lin = '$P!{LIN}' END AND CASE WHEN '$P!{MARC}' = '' THEN marc = marc ELSE marc = '$P!{MARC}' END AND CASE WHEN '$P!{IMP}' = '' THEN prods.IMPUE = prods.IMPUE ELSE prods.IMPUE = '$P!{IMP}' END AND CASE WHEN '$P!{CLAS}' = '' THEN codext = codext ELSE codext = '$P!{CLAS}' END GROUP BY existalma.alma, prod ORDER BY prod]]>
+	</queryString>
+	<field name="unid" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="PROD" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descrip" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="exist" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ALMA" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ALMADESCRIP" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="TOTEXIST" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{exist}]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_ALMACEN" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{exist}]]></variableExpression>
+	</variable>
+	<variable name="RETURN_VALUE" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{exist}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="2" width="79" height="13" uuid="a42d1d12-0551-4d27-8a6a-96fe752d62d3"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PROD}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="79" y="2" width="354" height="13" uuid="e6966304-6b25-442e-ad7a-b55feec58775"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descrip}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="451" y="2" width="71" height="13" uuid="47459c70-7699-4016-9015-cfaebc8bd4d0"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{exist}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="50">
+			<staticText>
+				<reportElement x="361" y="11" width="73" height="12" forecolor="#3333FF" uuid="c9d4eb0a-f019-412b-be71-142bcb1cb39e"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Almacén:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="451" y="11" width="54" height="12" uuid="86c50b71-7cfe-4d6a-8b09-6f9ba8c8b7b6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TOTAL_ALMACEN}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

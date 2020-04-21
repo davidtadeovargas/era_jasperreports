@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="9704ac55-57bb-4424-9622-f93114b4b088">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="234"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<topPen lineWidth="1.0" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="New Dataset 1" uuid="b789a42a-a48f-4044-92a9-f268c430dced"/>
+	<parameter name="idempresa" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2801169316"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="F_D" class="java.lang.String"/>
+	<parameter name="F_A" class="java.lang.String"/>
+	<parameter name="EMP" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ESTAD" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="VENC" class="java.lang.String"/>
+	<parameter name="LOG" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CHECK" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="cuentabanco" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SERIE" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SERIED" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="USUARIO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CONCEPTO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="USR_VAC" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\augus\\OneDrive\\Documentos\\Easy Retail Gas Campanita\\Electricos\\src\\jasreport\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SERIEP" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+        d.id,
+        d.fecha_documento,
+        d.serie,
+        d.folio,
+        d.codigo_cliente_proveedor,
+        d.usuario,
+        d.importe,
+        d.estado,
+        d.concepto,
+        e.ser,
+        e.nom, 
+        d.uuid_fiscal,
+        d.fechaTimbrado 
+    FROM
+        documentos_pago d 
+    INNER JOIN 
+        movimientos_pagos m
+	  ON d.id = m.pago_id
+    INNER JOIN
+        emps e 
+            ON d.codigo_cliente_proveedor = e.codigo
+        AND d.idempresa = e.idempresa 
+    WHERE
+        d.idempresa = '$P!{idempresa}'
+        AND CASE WHEN '$P!{SERIED}' = '' THEN m.serie = m.serie ELSE m.serie = '$P!{SERIED}' END 
+	AND CASE WHEN '$P!{SERIEP}' = '' THEN d.serie = d.serie ELSE d.serie = '$P!{SERIEP}' END 
+        AND d.tipo = '0'
+        AND uuid_fiscal <> '' 
+        AND CASE WHEN '$P!{EMP}' = '' THEN d.codigo_cliente_proveedor = d.codigo_cliente_proveedor ELSE d.codigo_cliente_proveedor = '$P!{EMP}' END
+        AND CASE WHEN '$P!{F_D}' = '' THEN d.fecha_documento = d.fecha_documento ELSE DATE_FORMAT(d.fechatimbrado,'%Y-%m-%d') >= '$P!{F_D}' END 
+        AND CASE WHEN '$P!{F_A}' = '' THEN d.fecha_documento = d.fecha_documento ELSE DATE_FORMAT(d.fechatimbrado,'%Y-%m-%d') <= '$P!{F_A}' END 
+        AND d.estado <> 'CA' 
+        AND CASE WHEN '$P!{USR_VAC}' = '' THEN d.usuario = d.usuario ELSE d.usuario in ($P!{USUARIO}) END
+     GROUP BY
+	d.id
+     ORDER BY
+        d.fechaTimbrado,
+        d.codigo_cliente_proveedor;]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_documento" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="serie" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="folio" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codigo_cliente_proveedor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="usuario" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="importe" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estado" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="concepto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ser" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nom" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="uuid_fiscal" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechaTimbrado" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="importe" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{importe}]]></variableExpression>
+	</variable>
+	<variable name="totalDocumento" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="totalAbono" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="totalPendiente" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="5" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="76" splitType="Stretch">
+			<staticText>
+				<reportElement x="153" y="20" width="244" height="38" forecolor="#009999" uuid="364a0149-2a00-4925-824c-a0d668f6cfde"/>
+				<textElement textAlignment="Center">
+					<font size="25" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REP Emitidos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="45" width="26" height="15" uuid="b244af57-0e65-492d-be2d-9e5b6744b3c3"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Al:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="30" width="26" height="15" uuid="e116ac4c-3129-41f6-bab3-6a0a8871668b"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Del:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="37" y="30" width="116" height="15" uuid="aa01f04f-3b7f-4405-8b88-e9174e1017db"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{F_D}=="")?"Todas las Fechas":$P{F_D}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="37" y="45" width="116" height="15" uuid="eb494b9c-2b45-4960-89a9-9d3c0f70de8a"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{F_A}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="11" y="6" width="23" height="20" uuid="82cd80c4-ab7e-4263-a97f-17e0b5ea9ad2"/>
+				<imageExpression><![CDATA[$P{LOG}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="432" y="1" width="60" height="13" uuid="6e486492-6b7f-43af-910e-663399f76bee"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pag "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="500" y="1" width="54" height="13" uuid="c1b3d68e-3d51-4f47-8ee2-abb0eea0bde3"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="397" y="32" width="73" height="13" forecolor="#3333FF" uuid="f1c24bae-e4bf-481b-9e25-c1afa2c00a42"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de creación:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="470" y="32" width="83" height="13" uuid="e2aba0d9-b5fa-4e51-9dce-073c1f045b02"/>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="60" width="69" height="13" uuid="4ebe3ca1-e4ad-4d8e-a134-226c96ac9746"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cocepto de pago:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="60" width="73" height="13" uuid="1bbc3d2a-47e0-49ad-b7a2-7677eedc3855"/>
+				<textFieldExpression><![CDATA[($P{CONCEPTO}=="")?" Todos los conceptos":$P{CONCEPTO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="83" splitType="Stretch">
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="448" y="30" width="44" height="13" forecolor="#000000" uuid="dfd57a23-702a-43eb-a97e-601801f9babb"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Usuario:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="2" y="14" width="32" height="13" forecolor="#000000" uuid="965595ce-ae63-45dd-a445-f058cb02bd9a"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="97" y="14" width="50" height="13" forecolor="#000000" uuid="9640d9e7-9509-47b6-a85a-97450be4b9a1"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Importe:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="34" y="14" width="62" height="13" uuid="63ccd4ef-b81d-4c3b-ac81-b1ec456de1d9"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_documento}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="147" y="14" width="64" height="13" uuid="70d7b510-28ba-4afa-bb8f-8518799bda15"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{importe}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="2" y="1" width="217" height="13" uuid="ac7f2b7e-b0c0-4291-9f55-77c78da43229"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pago: " + $F{serie} + " " + $F{folio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="492" y="30" width="61" height="13" uuid="d479af3b-b516-4f63-8ed9-c3e29f5c9851"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="34" y="27" width="62" height="16" uuid="aa6b1ded-bbad-4bd0-b015-d881ac7ee938"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo_cliente_proveedor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="97" y="27" width="50" height="16" forecolor="#000000" uuid="552d809b-3bad-45a6-9a2a-ab96d65255f3"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="147" y="27" width="198" height="16" uuid="86b9085d-b047-4221-8e4c-facc66c4f627"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nom}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="27" width="34" height="16" forecolor="#000000" uuid="81da9578-49c0-4b45-9137-58a49109f664"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cliente:]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="1" y="43" width="553" height="40" uuid="93ce3a60-a0f0-474a-9a0c-fb6e6afb9f40"/>
+				<subreportParameter name="IdPago">
+					<subreportParameterExpression><![CDATA[$F{id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="TTotal" toVariable="totalDocumento" calculation="Sum"/>
+				<returnValue subreportVariable="TAbono" toVariable="totalAbono" calculation="Sum"/>
+				<returnValue subreportVariable="TPendiente" toVariable="totalPendiente" calculation="Sum"/>
+				<subreportExpression><![CDATA["jasreport/rptUsuarioDetalle.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement x="259" y="14" width="152" height="13" uuid="60330149-49bf-4b19-8a5f-e50c5adc0071"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{uuid_fiscal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="209" y="14" width="50" height="13" forecolor="#000000" uuid="1170de89-60af-41b0-8d3f-e6f5677a13c2"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Folio Fiscal:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="411" y="14" width="69" height="13" forecolor="#000000" uuid="e5baacf8-abb3-46a8-a4c3-e306b1b215e1"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Timbrado:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement x="480" y="14" width="75" height="13" uuid="5b0bde4d-2792-4b65-b5b0-76686b3a9c0e"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaTimbrado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="17" splitType="Stretch"/>
+	</columnFooter>
+	<summary>
+		<band height="58" splitType="Stretch">
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="2" y="13" width="61" height="13" forecolor="#3333FF" uuid="0df49e32-2d7d-4663-a4a0-909accfb4588"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pagos]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="2" y="26" width="61" height="20" uuid="2a59d4d8-42b2-4d0b-a3bb-0625f5e940ac"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement stretchType="RelativeToTallestObject" x="3" y="10" width="550" height="1" uuid="f9bea13c-c8a0-41d5-bb3a-8eec85b3a341"/>
+			</line>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="83" y="13" width="61" height="13" forecolor="#3333FF" uuid="633ebeb5-a513-4e4f-a75a-12e62e4e7bd7"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Totales:]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="337" y="13" width="74" height="13" uuid="a42131dc-8d40-4168-b0c7-826424d41ff0"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalDocumento}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="470" y="13" width="85" height="13" uuid="2326667c-6e5a-41cd-824d-92419defd9e6"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalPendiente}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="411" y="13" width="59" height="13" uuid="705bde7f-0ce4-4a97-8087-276b11971d36"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalAbono}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

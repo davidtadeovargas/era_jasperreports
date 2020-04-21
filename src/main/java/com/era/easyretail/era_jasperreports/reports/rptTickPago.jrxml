@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="180" pageHeight="842" columnWidth="180" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="2" uuid="9704ac55-57bb-4424-9622-f93114b4b088">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="460"/>
+	<parameter name="LOG" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idPago" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="IMPLET" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 
+    d.fecha_documento,
+    CONCAT(d.serie, d.folio) FolioP,
+    d.importe,
+    CONCAT(e.nom,
+char(13),
+'RFC: ',
+e.rfc,
+char(13),
+e.calle,
+' ',
+e.noext,
+' INT: ',
+e.noint,
+char(13),
+e.col,
+char(13),
+e.ciu,
+', ',
+e.estad,
+', ',
+e.pai,
+char(13),
+'CP: ',
+e.cp,
+char(13),
+'TEL: ',
+e.lada,
+e.tel) cliente,
+    CONCAT(b.nom,
+char(13),
+'RFC: ',
+b.rfc,
+char(13),
+b.calle,
+' ',
+b.noext,
+' INT: ',
+b.noint,
+char(13),
+b.col,
+char(13),
+b.ciu,
+', ',
+b.estad,
+', ',
+b.pai,
+char(13),
+'CP: ',
+b.cp,
+char(13),
+'TEL: ',
+b.ladaen,
+b.tel) empresa,
+    concat(m.serie, m.folio) FolioF,
+    m.abono,
+    m.pendiente
+FROM
+    movimientos_pagos m
+        LEFT JOIN
+    documentos_pago d ON d.id = m.pago_id
+        LEFT JOIN
+    emps e ON e.codigo = d.codigo_cliente_proveedor
+        AND d.idempresa = e.idempresa
+		LEFT JOIN
+	basdats b on d.idempresa = b.codemp
+WHERE
+    d.id = $P!{idPago} AND d.tipo = 0;]]>
+	</queryString>
+	<field name="fecha_documento" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FolioP" class="java.lang.String"/>
+	<field name="importe" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="empresa" class="java.lang.String"/>
+	<field name="FolioF" class="java.lang.String"/>
+	<field name="abono" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pendiente" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="234" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="3" y="169" width="138" height="63" uuid="17fe7549-a6a1-4866-b757-7fcdfca613c3"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="5" y="0" width="136" height="71" uuid="fc9f3c9c-8283-4cd1-ac01-031665b7116f"/>
+				<imageExpression><![CDATA[$P{LOG}]]></imageExpression>
+			</image>
+			<line>
+				<reportElement stretchType="RelativeToTallestObject" x="4" y="166" width="135" height="1" uuid="7c4e4d02-5f43-432d-b972-2a9b3664804d"/>
+			</line>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="4" y="73" width="32" height="13" uuid="28b79e89-9056-42b7-aceb-48e9e6e9f738"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="4" y="102" width="136" height="63" uuid="1ec3878e-5dc1-4446-9cd7-ed3e0f3f26c9"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empresa}
+
+]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="73" y="73" width="26" height="13" uuid="a5eed4c2-5c91-4500-8e36-505ba91c4356"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PAGO:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="99" y="73" width="42" height="13" uuid="f326517f-8eca-448d-ac4e-d996e39e6f5b"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FolioP}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="5" y="87" width="69" height="13" uuid="5b588dfa-10a9-4275-b647-b05f4c284570"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_documento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="10" splitType="Stretch">
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="3" y="0" width="47" height="10" uuid="379f3dea-60e3-4116-a719-a31ec55bac2a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FOLIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="50" y="0" width="49" height="10" uuid="6ee1fa6d-dff7-4d89-a325-1c70c8d0772d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ABONO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="99" y="0" width="41" height="10" uuid="7fe156d3-b5b8-4b2f-96c9-f69d190befbf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PENDIENTE]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00" isBlankWhenNull="false">
+				<reportElement stretchType="RelativeToTallestObject" x="50" y="0" width="49" height="10" uuid="5c9614ee-5a70-4d16-b307-a3620b9e8340"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{abono}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00" isBlankWhenNull="false">
+				<reportElement stretchType="RelativeToTallestObject" x="99" y="0" width="41" height="10" uuid="de9d3b1e-5e3a-45ae-ad50-d7ff9797b754"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pendiente}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="3" y="0" width="47" height="10" uuid="c1a0c8b6-f453-465b-9d33-e0150e3b3aaa"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FolioF}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="53" splitType="Stretch">
+			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00">
+				<reportElement stretchType="RelativeToTallestObject" x="95" y="25" width="44" height="9" uuid="67d1cbf6-b026-419e-ac0f-52e0ad0cd2de"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{importe}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="48" y="25" width="47" height="9" uuid="41330eee-72db-4d12-89e0-99e428ecd3bf"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="6" y="3" width="134" height="13" uuid="39f423b1-8ff8-4e30-b9de-db143d585170"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{IMPLET}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="35" width="134" height="15" uuid="724ef0ad-d428-45a2-a525-34dc651d8c93"/>
+				<textElement>
+					<font size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[COMPROBANTE SIN VALOR FISCAL]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
