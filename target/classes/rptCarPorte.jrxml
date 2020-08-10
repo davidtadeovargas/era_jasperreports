@@ -1,0 +1,973 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="9704ac55-57bb-4424-9622-f93114b4b088">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="192"/>
+	<parameter name="idempresa" class="java.lang.String"/>
+	<parameter name="COD_EMPRESA" class="java.lang.String"/>
+	<parameter name="FDOC" class="java.lang.String"/>
+	<parameter name="NOMEMP" class="java.lang.String"/>
+	<parameter name="TEL" class="java.lang.String"/>
+	<parameter name="CALL" class="java.lang.String"/>
+	<parameter name="COL" class="java.lang.String"/>
+	<parameter name="CP" class="java.lang.String"/>
+	<parameter name="NOEXT" class="java.lang.String"/>
+	<parameter name="NOINT" class="java.lang.String"/>
+	<parameter name="CIU" class="java.lang.String"/>
+	<parameter name="ESTAD" class="java.lang.String"/>
+	<parameter name="RFC" class="java.lang.String"/>
+	<parameter name="CORR" class="java.lang.String"/>
+	<parameter name="IMPLET" class="java.lang.String"/>
+	<parameter name="EMPLOC" class="java.lang.String"/>
+	<parameter name="TELLOC" class="java.lang.String"/>
+	<parameter name="CALLLOC" class="java.lang.String"/>
+	<parameter name="COLLOC" class="java.lang.String"/>
+	<parameter name="CPLOC" class="java.lang.String"/>
+	<parameter name="CIULOC" class="java.lang.String"/>
+	<parameter name="ESTADLOC" class="java.lang.String"/>
+	<parameter name="PAILOC" class="java.lang.String"/>
+	<parameter name="RFCLOC" class="java.lang.String"/>
+	<parameter name="CONSFAC" class="java.lang.String"/>
+	<parameter name="VTA" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LOG" class="java.lang.String"/>
+	<parameter name="SER" class="java.lang.String"/>
+	<parameter name="FORMPAG" class="java.lang.String"/>
+	<parameter name="METPAG" class="java.lang.String"/>
+	<parameter name="CTA" class="java.lang.String"/>
+	<parameter name="OBSERVACIONES" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PAI" class="java.lang.String"/>
+	<parameter name="DOMENT" class="java.lang.String"/>
+	<parameter name="LOGE" class="java.lang.String"/>
+	<parameter name="MON" class="java.lang.String"/>
+	<parameter name="QR" class="java.lang.String"/>
+	<parameter name="FOLFISC" class="java.lang.String"/>
+	<parameter name="SELL" class="java.lang.String"/>
+	<parameter name="SELLSAT" class="java.lang.String"/>
+	<parameter name="CADORI" class="java.lang.String"/>
+	<parameter name="NOINTLOC" class="java.lang.String"/>
+	<parameter name="NOEXTLOC" class="java.lang.String"/>
+	<parameter name="CERTSAT" class="java.lang.String"/>
+	<parameter name="LUGEXP" class="java.lang.String"/>
+	<parameter name="REGFIS" class="java.lang.String"/>
+	<parameter name="CTAPRED" class="java.lang.String"/>
+	<parameter name="TRANS" class="java.lang.String"/>
+	<parameter name="REM" class="java.lang.String"/>
+	<parameter name="CALLREM" class="java.lang.String"/>
+	<parameter name="NOEXTREM" class="java.lang.String"/>
+	<parameter name="NOINTREM" class="java.lang.String"/>
+	<parameter name="COLREM" class="java.lang.String"/>
+	<parameter name="CPREM" class="java.lang.String"/>
+	<parameter name="CIUREM" class="java.lang.String"/>
+	<parameter name="ESTADREM" class="java.lang.String"/>
+	<parameter name="PAIREM" class="java.lang.String"/>
+	<parameter name="DES" class="java.lang.String"/>
+	<parameter name="CALLREC" class="java.lang.String"/>
+	<parameter name="NOEXTREC" class="java.lang.String"/>
+	<parameter name="NOINTREC" class="java.lang.String"/>
+	<parameter name="COLREC" class="java.lang.String"/>
+	<parameter name="CPREC" class="java.lang.String"/>
+	<parameter name="CIUREC" class="java.lang.String"/>
+	<parameter name="ESTADREC" class="java.lang.String"/>
+	<parameter name="PAIREC" class="java.lang.String"/>
+	<parameter name="RFCREM" class="java.lang.String"/>
+	<parameter name="FENT" class="java.lang.String"/>
+	<parameter name="CALLDES" class="java.lang.String"/>
+	<parameter name="NOEXTDES" class="java.lang.String"/>
+	<parameter name="NOINTDES" class="java.lang.String"/>
+	<parameter name="COLDES" class="java.lang.String"/>
+	<parameter name="CPDES" class="java.lang.String"/>
+	<parameter name="CIUDES" class="java.lang.String"/>
+	<parameter name="ESTADDES" class="java.lang.String"/>
+	<parameter name="PAIDES" class="java.lang.String"/>
+	<parameter name="CALLENT" class="java.lang.String"/>
+	<parameter name="NOEXTENT" class="java.lang.String"/>
+	<parameter name="NOINTENT" class="java.lang.String"/>
+	<parameter name="COLENT" class="java.lang.String"/>
+	<parameter name="CPENT" class="java.lang.String"/>
+	<parameter name="CIUENT" class="java.lang.String"/>
+	<parameter name="ESTADENT" class="java.lang.String"/>
+	<parameter name="PAIENT" class="java.lang.String"/>
+	<parameter name="PLACAS" class="java.lang.String"/>
+	<parameter name="VEHI" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT total_retencion, total_traslado, DATE(fent) fentrega, vtas.SUBTOT subtotal, vtas.IMPUE, vtas.TOT total, totdescu, prod, SUM(cant) AS cantidad, unid unidad, descrip descripcion,totdescu tdescuento, SUM(impo) AS importe, pre precio, vtas.usocfdi 
+FROM partvta LEFT JOIN vtas ON vtas.VTA = partvta.VTA 
+LEFT OUTER JOIN emps ON vtas.CODEMP = emps.codigo AND emps.IDEMPRESA = vtas.IDEMPRESA WHERE kitmae = 0 AND partvta.VTA = $P!{VTA} GROUP BY prod, unid, descrip, pre, impo, cant
+ORDER BY partvta.id_id ASC;]]>
+	</queryString>
+	<field name="total_retencion" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total_traslado" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fentrega" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="subtotal" class="java.math.BigDecimal"/>
+	<field name="IMPUE" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total" class="java.math.BigDecimal"/>
+	<field name="totdescu" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="prod" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cantidad" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="unidad" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="tdescuento" class="java.math.BigDecimal"/>
+	<field name="importe" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="precio" class="java.math.BigDecimal"/>
+	<field name="usocfdi" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="375" splitType="Stretch">
+			<rectangle>
+				<reportElement x="3" y="105" width="406" height="105" uuid="d46ecf16-4883-47a8-baf8-54553cc353ff"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="414" y="0" width="147" height="191" uuid="9a594a32-83f7-4c50-9fd9-769ed3ee5866"/>
+			</rectangle>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="418" y="0" width="47" height="13" forecolor="#000000" uuid="764e3789-0be1-4ddb-8c9f-efb34e516b01"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Carta Porte:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="7" y="117" width="393" height="13" uuid="17fe7549-a6a1-4866-b757-7fcdfca613c3"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NOMEMP}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="7" y="177" width="194" height="12" uuid="a2fb44be-3703-48b1-bbb2-8a5a1b67afb7"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TEL}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="7" y="141" width="393" height="13" uuid="5ae1324c-bb96-4ae9-b459-093ad87fb3b4"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CALL} + " " + $P{NOEXT} + " " + $P{NOINT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="7" y="153" width="393" height="13" uuid="66e045e7-f988-459b-8d08-8e58ced78edf"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{COL} + " C.P. " + $P{CP}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="7" y="165" width="393" height="13" uuid="5d8a12b0-bbe2-486f-a840-53ceb20cc2c9"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CIU} + ", " + $P{ESTAD} + " " + $P{PAI}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="26" y="129" width="374" height="13" uuid="a990f021-120a-4e55-b4af-9e284fd37dbf"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{RFC}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="7" y="188" width="194" height="12" uuid="ff6e811c-927b-4b99-9d74-592b326a7a07"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CORR}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="114" y="48" width="126" height="13" forecolor="#000000" uuid="ca88e707-af74-4c2b-9f9b-a64d6346b21f"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CALLLOC}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="114" y="60" width="126" height="13" forecolor="#000000" uuid="89021ed3-1967-4c67-beab-62a310ce887c"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{COLLOC}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="260" y="60" width="73" height="13" forecolor="#000000" uuid="08bae0f9-0433-4fab-9124-6d0f8e96b913"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CPLOC}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="114" y="72" width="126" height="13" forecolor="#000000" uuid="10180cc5-61d2-41c1-a167-b03e8fe084a0"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CIULOC}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="240" y="73" width="160" height="13" forecolor="#000000" uuid="94bf2319-a8af-42b1-a6c4-4972d089826b"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{ESTADLOC}==null)?"":$P{ESTADLOC}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="114" y="36" width="286" height="13" forecolor="#000000" uuid="27178d8b-603b-47ff-bbf4-72a8eb176ea2"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{RFCLOC}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="465" y="0" width="26" height="13" uuid="4cbbc006-5d8a-4407-a58b-9f0443a9abb9"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CONSFAC}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="491" y="0" width="30" height="13" forecolor="#000000" uuid="2e30ac7c-b048-4d28-89ca-e4a873b4696e"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Serie:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="521" y="0" width="40" height="13" uuid="68d0d019-56e6-42b2-b46a-08ab2b52aa94"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{SER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="414" y="191" width="52" height="9" forecolor="#000000" uuid="e9c9509f-f7e8-420e-857e-95f462dce96a"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Forma Pago:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="413" y="200" width="52" height="13" forecolor="#000000" uuid="4593d84a-4a91-4fc7-90a3-686f5364984f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cuenta:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="7" y="129" width="20" height="13" forecolor="#000000" uuid="a7711e07-ca5b-4f51-b620-99b3bed26306"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RFC:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="465" y="191" width="91" height="9" uuid="55cebc47-e2f9-4a41-9628-173889143c2d"/>
+				<textElement>
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{METPAG}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="465" y="200" width="91" height="13" uuid="b889e1a2-88e5-4b85-8290-e8089cc134d4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CTA}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="418" y="102" width="137" height="12" uuid="7544f92c-c4fd-453e-a444-c6218967e5dd"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FDOC}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="418" y="12" width="137" height="13" forecolor="#000000" uuid="87e14068-ec44-4e2d-b1f4-a93b5a45b01b"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Folio Fiscal:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="418" y="23" width="137" height="18" uuid="8caf5d0e-18b7-4dca-930c-ca4e72eae439"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FOLFISC}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="414" y="12" width="147" height="1" uuid="29fccb77-3fe8-4edf-9407-005445fe6f41"/>
+			</line>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="419" y="41" width="137" height="13" forecolor="#000000" uuid="ea0d194a-dfc0-4271-ae25-6edbdf9524d3"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No.Certificado SAT:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="419" y="53" width="137" height="15" uuid="b128d75a-672a-472c-acd9-3239d598fd3e"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CERTSAT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="418" y="68" width="137" height="13" forecolor="#000000" uuid="d0631777-3d6c-4ee9-ade1-078770557654"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha y hora certificación:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="418" y="79" width="137" height="12" uuid="1e1894a2-8886-44dd-875f-1f6e0f49c02b"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FDOC}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="418" y="90" width="137" height="13" forecolor="#000000" uuid="7bad41bc-57ba-428e-85d4-910d5552aa23"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha y hora de emisión:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="419" y="114" width="137" height="13" forecolor="#000000" uuid="71b1246c-2c43-485c-846e-b61b20ce1d7a"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lugar de expedición:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="419" y="125" width="137" height="13" uuid="45f5b19d-accb-4d83-bfd6-baf042e80d10"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{LUGEXP}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="419" y="138" width="137" height="12" forecolor="#000000" uuid="990d3ed5-80e6-47aa-a66d-4a71e134d979"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Regimén fiscal:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="419" y="150" width="137" height="16" uuid="d87d8300-d251-4e30-b1ab-df89e5b7125a"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REGFIS}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="4" y="10" width="93" height="92" uuid="fc9f3c9c-8283-4cd1-ac01-031665b7116f"/>
+				<imageExpression><![CDATA[$P{LOG}]]></imageExpression>
+			</image>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="114" y="84" width="126" height="13" forecolor="#000000" uuid="4ca9adbe-5c61-46ff-9c48-4f77e5a41415"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TELLOC}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="7" y="105" width="82" height="13" forecolor="#000000" uuid="548721a5-4955-47e2-b1ea-c53adec4f65d"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Receptor:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="114" y="12" width="45" height="13" forecolor="#000000" uuid="91f733ae-17a9-4a02-8701-982833aa7eff"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Emisor:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="240" y="60" width="21" height="13" forecolor="#000000" uuid="47490f18-d4ae-4e90-b711-4150ef29f197"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CP:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="332" y="48" width="68" height="13" uuid="1bcfa2c9-cdd1-477f-8647-d015807ff18b"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NOINTLOC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="240" y="48" width="92" height="13" uuid="003e374e-43cb-4505-88cb-e2798c2e6379"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NOEXTLOC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="114" y="24" width="286" height="12" uuid="57bbe535-bd56-4fc7-89e8-f9bb430e0aab"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{EMPLOC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="7" y="198" width="194" height="11" uuid="62ddfb4f-f0b7-437c-8559-4fca07816e59"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CTAPRED}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="419" y="166" width="137" height="11" forecolor="#000000" uuid="a7f8e83b-d384-4831-9044-a3715ea7b6e5"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Método de Pago:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="419" y="176" width="137" height="14" forecolor="#000000" uuid="3af00664-f9a3-4a34-8576-4a8b87378a35"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{FORMPAG}==null)?"":$P{FORMPAG}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="250" y="177" width="150" height="12" uuid="31d47cbd-bb83-4de6-9742-c000b7ca29a6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usocfdi}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="201" y="178" width="49" height="12" forecolor="#000000" uuid="69168383-b6c7-4265-a781-e8e50beb9024"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Uso de cfdi:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="127" y="216" width="45" height="13" forecolor="#000000" uuid="5523f135-7cc5-485a-8a2b-38db36fc3bed"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Origen:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="412" y="216" width="45" height="13" forecolor="#000000" uuid="d0f5beb5-28bf-4ce4-9d1c-f70b44a64ecd"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Destino:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="7" y="242" width="283" height="13" uuid="9ffafcb6-4db3-460d-8e71-59b269780d78"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CALLREM} + " " + $P{NOEXTREM} + " " + $P{NOINTREM}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="7" y="255" width="283" height="13" uuid="4017a08f-7d04-499a-8093-d6265cdc81a4"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{COLREM} + " C.P. " + $P{CPREM}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="7" y="268" width="283" height="13" uuid="6fd661b5-a360-4f56-b519-93ffde3b1a1f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CIUREM} + ", " + $P{ESTADREM} + " " + $P{PAIREM}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="7" y="281" width="20" height="13" forecolor="#000000" uuid="e8aa2be5-dd4f-4cb8-9bec-521a67958e0c"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RFC:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="26" y="281" width="264" height="13" uuid="a9536c7d-f94e-4021-8d4d-22b933ac57a3"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{RFCREM}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="290" y="242" width="274" height="13" uuid="44bc0260-032d-4397-b3e7-e4da2fc9c792"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CALLDES} + " " + $P{NOEXTDES} + " " + $P{NOINTDES}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="291" y="255" width="273" height="13" uuid="9654cf06-02b7-401f-ae02-e4bbb0afaf84"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{COLDES} + " C.P. " + $P{CPDES}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="291" y="268" width="273" height="13" uuid="4694f23e-9630-4594-9dd8-b9ce31aa6b4f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CIUDES} + ", " + $P{ESTADDES} + " " + $P{PAIDES}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="51" y="229" width="239" height="13" uuid="e8c49aea-7bd3-41a6-a195-f757628459a4"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REM}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="6" y="229" width="45" height="13" forecolor="#000000" uuid="19790f16-a15c-4296-b7ac-8e3db7f55aea"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Remitente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="290" y="229" width="55" height="13" forecolor="#000000" uuid="44643eb6-82d9-4571-9cac-e8faaf4715e5"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Destinatario:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="345" y="229" width="219" height="13" uuid="50e3db19-6ab4-4d44-a8b9-9e9037f195ca"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DES}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="7" y="294" width="68" height="13" forecolor="#000000" uuid="bf7a42a5-8a9f-4181-9768-98aa3049e8df"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Se recogerá en:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="7" y="307" width="283" height="13" uuid="9035efe4-720b-4328-a0dc-a808420b3a34"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CALLREC} + " " + $P{NOEXTREC} + " " + $P{NOINTREC}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="7" y="320" width="283" height="13" uuid="dacd73f8-5062-4007-b7de-b62ab8a5e348"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{COLREC} + " C.P. " + $P{CPREC}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="7" y="333" width="283" height="13" uuid="993ce3db-e014-459d-9153-85c4d978742c"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CIUREC} + ", " + $P{ESTADREC} + " " + $P{PAIREC}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="290" y="320" width="274" height="13" uuid="187d7bf3-ce89-426a-be41-4efb18e57d8d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{COLENT} + " C.P. " + $P{CPENT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="291" y="333" width="273" height="13" uuid="7a555b9c-bb98-44c8-8949-beba43c7e1a7"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CIUENT} + ", " + $P{ESTADENT} + " " + $P{PAIENT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="291" y="307" width="273" height="13" uuid="9ab2e088-086b-4708-b912-b7fac6ee0a56"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CALLENT} + " " + $P{NOEXTENT} + " " + $P{NOINTENT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="290" y="294" width="76" height="13" forecolor="#000000" uuid="a45189a2-15b4-4b00-a081-18c08a1ee11e"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Se entregará en:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="7" y="346" width="56" height="13" forecolor="#000000" uuid="97009d17-ecb8-4d5f-ba78-76cc5cd19db8"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Transportista:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="63" y="346" width="227" height="13" uuid="25cea0c2-0d97-4786-819e-bfc38b1a570d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TRANS}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="213" y="359" width="77" height="13" uuid="40db8cf2-f5c2-4a78-9ccb-ae587602a4a2"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PLACAS}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="174" y="359" width="39" height="13" forecolor="#000000" uuid="609a04b1-daae-4a9e-99e9-135a74cd8c07"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Placas:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="64" y="359" width="108" height="13" uuid="08f9ec33-6e19-4829-9f37-40607b0411ef"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{VEHI}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="7" y="359" width="57" height="13" forecolor="#000000" uuid="c9a5afd1-3568-4704-ad43-913ac2aa257d"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vehiculo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="290" y="359" width="113" height="13" forecolor="#000000" uuid="1e3cab54-2012-4d2e-b41f-207910eb77a1"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha estimada de entrega:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+				<reportElement stretchType="RelativeToTallestObject" x="403" y="359" width="161" height="13" uuid="19a768b0-0873-4a89-972f-a30c27e32ef6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FENT}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="3" y="216" width="560" height="156" uuid="578fdc0f-22d6-4aaa-8f44-5ad2f43471fc"/>
+			</rectangle>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="18" splitType="Stretch">
+			<rectangle>
+				<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="2" y="2" width="559" height="16" backcolor="#CC0000" uuid="53340409-9bd9-4f75-ab82-317aa0f2a7fc"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="14" splitType="Stretch">
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="2" y="1" width="46" height="13" forecolor="#3333FF" uuid="dbd01286-2215-4fdf-ba1b-aca4b770e19c"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CANTIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="97" y="1" width="46" height="13" forecolor="#3333FF" uuid="8425708d-5815-4942-b4b0-30f3513ca50c"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UNIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="142" y="1" width="240" height="13" forecolor="#3333FF" uuid="bcbaf185-a9fa-4b2b-9f09-701a59adc46d"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRIPCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="382" y="1" width="83" height="13" forecolor="#3333FF" uuid="96cfd45e-c6ea-406f-97ff-f43d1c0b069b"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[P.UNITARIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="466" y="1" width="87" height="13" forecolor="#3333FF" uuid="78869e54-0123-4ebe-b8a0-07a37bf61439"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IMPORTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="48" y="1" width="46" height="13" forecolor="#3333FF" uuid="6c2edac7-c0a9-47e9-a0db-8b4e5cb2e627"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COD.PROD]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement stretchType="RelativeToTallestObject" x="1" y="0" width="47" height="13" uuid="2a23a515-d325-4381-89ce-092fa0def3d2"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement stretchType="RelativeToTallestObject" x="97" y="0" width="46" height="13" uuid="7e0785ab-35b0-4151-85e1-588c8da97a95"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unidad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="142" y="0" width="240" height="13" uuid="ac444960-dce5-4d72-bd27-748629a89901"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.0000">
+				<reportElement stretchType="RelativeToTallestObject" x="382" y="0" width="83" height="13" uuid="d054c2e6-67fb-458a-a991-ebeedcdbb390"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{precio}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement x="466" y="0" width="87" height="13" uuid="f113f82d-f618-466d-91b3-e68ca494e313"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{importe}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="48" y="0" width="49" height="13" uuid="d4503295-e7be-4742-8590-6a1105e72364"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{prod}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="282" splitType="Stretch">
+			<textField>
+				<reportElement x="433" y="267" width="60" height="13" uuid="6e486492-6b7f-43af-910e-663399f76bee"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pag "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="501" y="267" width="54" height="13" uuid="c1b3d68e-3d51-4f47-8ee2-abb0eea0bde3"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<rectangle radius="10">
+				<reportElement x="0" y="20" width="561" height="35" uuid="ca45a6f2-96ee-49d6-a4ef-a9c98431c2a7"/>
+			</rectangle>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="382" y="55" width="69" height="13" forecolor="#3333FF" uuid="756de2cd-2256-477f-989d-93818071b4df"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUBTOTAL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="382" y="82" width="69" height="13" forecolor="#3333FF" uuid="673407d1-2590-45d3-970b-abcfc9a2f78d"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IMPUESTO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="381" y="109" width="70" height="13" forecolor="#3333FF" uuid="89814022-1222-4d57-bcd7-bdf594f1b04c"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="3" y="37" width="546" height="13" forecolor="#000000" uuid="50a3b1a4-bdc1-406a-be4e-ee0caf9d1236"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{IMPLET}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="3" y="24" width="152" height="13" forecolor="#3333FF" uuid="18d11c49-554e-48da-9cff-9a4e56ff27e7"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL CON LETRA]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="1" y="0" width="559" height="14" backcolor="#CC0000" uuid="be37f40f-0fad-48a2-8fc7-a30b27766c51"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField pattern="#,##0.00">
+				<reportElement x="451" y="55" width="110" height="13" uuid="502f436b-3e99-4a7b-89e8-988f4fa9fafe"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{subtotal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="451" y="82" width="110" height="14" uuid="4e971feb-adca-43d9-a7a8-4b686f65a59c"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_traslado}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="451" y="109" width="110" height="13" uuid="56ea8065-3697-4b67-843a-ea9630dc0495"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame">
+				<reportElement x="5" y="182" width="69" height="69" uuid="3065955d-6041-4548-833f-1101e3e35b78"/>
+				<imageExpression><![CDATA[com.google.zxing.client.j2se.MatrixToImageWriter.toBufferedImage(
+     new com.google.zxing.qrcode.QRCodeWriter().encode(
+         $P{QR},
+         com.google.zxing.BarcodeFormat.QR_CODE, 300, 300))]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="76" y="153" width="123" height="13" forecolor="#000000" uuid="5dd91f71-a6e9-432e-b3f9-ddbfaa7b8264"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sello digital emisor:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="76" y="191" width="123" height="13" forecolor="#000000" uuid="e1340b9d-9a8f-4ad0-9d41-15cec84b42fe"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sello digital del SAT:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="76" y="225" width="479" height="13" forecolor="#000000" uuid="789fb757-08c0-4dae-b9f9-58586c63209c"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cadena original del complemento de certificación digital del SAT:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="76" y="165" width="480" height="21" uuid="3414635f-94cb-44de-bb00-e9a02884f7da"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{SELL}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="76" y="204" width="480" height="16" uuid="f4be9f12-0a0c-4c08-8aa4-94a50dd58f36"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{SELLSAT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="76" y="238" width="479" height="30" uuid="e402a8ee-c5d0-4ec0-b778-2071e6ee8fd9"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CADORI}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="76" y="267" width="195" height="13" forecolor="#000000" uuid="0cb1c481-4cbd-4490-a503-c5ce9f220381"/>
+				<textElement>
+					<font size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Este documento es una representación impresa de un CFDI]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="451" y="95" width="110" height="14" uuid="c6007f05-3bca-4df6-a50f-0195db215043"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_retencion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="382" y="96" width="69" height="13" forecolor="#3333FF" uuid="142647cc-641f-4427-b02e-5cc553a30b8d"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RETENCION:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="382" y="69" width="69" height="13" forecolor="#3333FF" uuid="2f1cad22-32e4-48df-a0e2-5f126dd83652"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCUENTO:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="449" y="69" width="112" height="13" uuid="a2fdc807-e286-4a72-93ce-e27855917d36"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tdescuento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="7" y="62" width="111" height="20" uuid="f056ddfd-9bf5-423f-bca6-f653a6734d56"/>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[Recibí de conformidad:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="109" width="111" height="20" uuid="f08d758d-5cab-4690-9e4b-e6d0dd3bcdc7"/>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[Firma del destinatario]]></text>
+			</staticText>
+			<line>
+				<reportElement x="6" y="108" width="153" height="1" uuid="99511307-235c-463a-9c0d-67bf66976eb9"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

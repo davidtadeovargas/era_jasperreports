@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="99377977-ac7a-4107-86dd-6f5a2b3a52af">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="88"/>
+	<parameter name="FINICIO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FFIN" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SERIE" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\augus\\Documents\\Sistemas\\Java\\Easy Retail GC\\EasyRetailAdmin\\src\\jasreport\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="BSERIE" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="IDEMPRESA" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LOG" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select 1;]]>
+	</queryString>
+	<field name="1" class="java.lang.Long"/>
+	<variable name="TotalEntradas" class="java.math.BigDecimal">
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="TotalSalidas" class="java.math.BigDecimal">
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="TotEntSal" class="java.math.BigDecimal" calculation="Sum">
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="67" splitType="Stretch">
+			<staticText>
+				<reportElement x="163" y="24" width="233" height="38" forecolor="#009999" uuid="2186af9d-6a80-4b6d-a17e-caa5097c5289"/>
+				<textElement textAlignment="Center">
+					<font size="25" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Corte de Caja]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="36" y="49" width="116" height="15" uuid="e59e2e9b-816b-4e01-b333-534634994c14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FFIN}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="10" y="10" width="23" height="20" uuid="6fff00ce-45a7-4220-a9a6-c7edb4e61174"/>
+				<imageExpression><![CDATA[$P{LOG}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="396" y="36" width="73" height="13" forecolor="#3333FF" uuid="d05db950-51a4-468d-86ea-c76d2c247187"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de creación:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="49" width="26" height="15" uuid="38632bb6-11e2-48af-a491-484e228c1ea5"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Al:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="469" y="36" width="83" height="13" uuid="8e153018-d2eb-46c3-8f38-83698e270599"/>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="34" width="26" height="15" uuid="dd43cae4-dc2a-45d6-9a9e-ce6dbbd125d5"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Del:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="36" y="34" width="116" height="15" uuid="c731b3b5-8c79-4878-aa57-b74b0c544b82"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FINICIO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" forecolor="#3333FF" uuid="b0074f17-3693-485b-b14d-49deb220e39d"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Documento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="100" height="20" forecolor="#3333FF" uuid="b6553343-8dce-4aad-84ed-4955afa7c82d"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Serie]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="100" height="20" forecolor="#3333FF" uuid="edbb03f4-19ed-4a24-bc4b-6431f6828e02"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Importe]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="308" splitType="Immediate">
+			<subreport>
+				<reportElement x="0" y="19" width="555" height="41" uuid="73079df3-53c3-48e9-943c-5a6903826ca7"/>
+				<subreportParameter name="bSeries">
+					<subreportParameterExpression><![CDATA[$P{BSERIE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="Ffin">
+					<subreportParameterExpression><![CDATA[$P{FFIN}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="IdEmpresa">
+					<subreportParameterExpression><![CDATA[$P{IDEMPRESA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="Finicio">
+					<subreportParameterExpression><![CDATA[$P{FINICIO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="Serie">
+					<subreportParameterExpression><![CDATA[$P{SERIE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="vTotal" toVariable="TotalEntradas"/>
+				<subreportExpression><![CDATA["jasreport/rptVentasA_entradas.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" forecolor="#009999" uuid="66802c18-d2ea-42d5-a7a0-9a8013d6c33d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Entradas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="61" width="100" height="20" forecolor="#009999" uuid="aeb92210-7f2b-4eb5-81fd-aa026367f107"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Salidas:]]></text>
+			</staticText>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="81" width="555" height="41" uuid="2eeadc74-5f9e-4cdf-a334-321f5a5430d5"/>
+				<subreportParameter name="bSeries">
+					<subreportParameterExpression><![CDATA[$P{BSERIE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="Ffin">
+					<subreportParameterExpression><![CDATA[$P{FFIN}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="IdEmpresa">
+					<subreportParameterExpression><![CDATA[$P{IDEMPRESA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="Finicio">
+					<subreportParameterExpression><![CDATA[$P{FINICIO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="Serie">
+					<subreportParameterExpression><![CDATA[$P{SERIE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="vTotalSal" toVariable="TotalSalidas"/>
+				<subreportExpression><![CDATA["jasreport/rptVentasA_salidas.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="122" width="100" height="20" forecolor="#009999" uuid="5ee3a8c8-0287-481c-a102-df6467e7432b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Totales:]]></text>
+			</staticText>
+			<textField evaluationTime="Band" pattern="¤ #,##0.00">
+				<reportElement positionType="Float" x="217" y="145" width="102" height="20" uuid="848d8ef1-9bf7-4d42-b4b3-5f821532ef54"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TotalEntradas}.subtract($V{TotalSalidas})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="164" width="100" height="20" forecolor="#009999" uuid="8e3b1316-1724-4c92-9f38-03224e15150a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Credito del día:]]></text>
+			</staticText>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="184" width="555" height="41" uuid="723c72b5-91ec-4704-a376-8a0288428318"/>
+				<subreportParameter name="bSeries">
+					<subreportParameterExpression><![CDATA[$P{BSERIE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="Ffin">
+					<subreportParameterExpression><![CDATA[$P{FFIN}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="IdEmpresa">
+					<subreportParameterExpression><![CDATA[$P{IDEMPRESA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="Finicio">
+					<subreportParameterExpression><![CDATA[$P{FINICIO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="Serie">
+					<subreportParameterExpression><![CDATA[$P{SERIE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["jasreport/rptVentasA_credito.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="229" width="100" height="20" forecolor="#009999" uuid="a73531c8-b85b-42e2-b3a6-88aff29cc0f2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Débito del día:]]></text>
+			</staticText>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="249" width="555" height="41" uuid="f0a15789-2e92-49fd-b20a-5b87a685c52c"/>
+				<subreportParameter name="bSeries">
+					<subreportParameterExpression><![CDATA[$P{BSERIE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="Ffin">
+					<subreportParameterExpression><![CDATA[$P{FFIN}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="IdEmpresa">
+					<subreportParameterExpression><![CDATA[$P{IDEMPRESA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="Finicio">
+					<subreportParameterExpression><![CDATA[$P{FINICIO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="Serie">
+					<subreportParameterExpression><![CDATA[$P{SERIE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["jasreport/rptVentasA_debito.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

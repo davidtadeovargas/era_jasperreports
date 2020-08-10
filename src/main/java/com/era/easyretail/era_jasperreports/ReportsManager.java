@@ -20,5 +20,7 @@ public class ReportsManager {
         return ReportsManager;
     }
     
-    
+    public TicketReportGenerator getTicketReportGenerator(){
+        return new TicketReportGenerator();
+    }
 }
