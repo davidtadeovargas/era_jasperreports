@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="255" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="234" leftMargin="1" rightMargin="20" topMargin="0" bottomMargin="20" whenResourceMissingType="Empty" uuid="9704ac55-57bb-4424-9622-f93114b4b088">
-	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.zoom" value="4.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="824"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="COD_EMPRESA" class="java.lang.String"/>
 	<parameter name="FDOC" class="java.lang.String"/>
-	<parameter name="idempresa" class="java.lang.String"/>
 	<parameter name="NOMEMP" class="java.lang.String"/>
 	<parameter name="TEL" class="java.lang.String"/>
 	<parameter name="CALL" class="java.lang.String"/>
@@ -40,10 +39,10 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT cant, prod, descrip, pre, impo, totdescu FROM partvta LEFT OUTER JOIN vtas ON vtas.VTA = partvta.VTA WHERE partvta.idempresa = $P{idempresa} AND kitmae = 0 AND partvta.VTA = '$P!{VTA}'
+		<![CDATA[SELECT cant, prod, descrip, pre, impo, totdescu FROM partvta LEFT OUTER JOIN vtas ON vtas.VTA = partvta.VTA WHERE kitmae = 0 AND partvta.VTA = '$P!{VTA}'
 ORDER BY partvta.id_id ASC]]>
 	</queryString>
-	<field name="cant" class="java.lang.Float">
+	<field name="cant" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="prod" class="java.lang.String">
@@ -52,13 +51,13 @@ ORDER BY partvta.id_id ASC]]>
 	<field name="descrip" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="pre" class="java.lang.Float">
+	<field name="pre" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="impo" class="java.lang.Float">
+	<field name="impo" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="totdescu" class="java.lang.Float">
+	<field name="totdescu" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<variable name="cant_1" class="java.lang.Float" calculation="Sum">

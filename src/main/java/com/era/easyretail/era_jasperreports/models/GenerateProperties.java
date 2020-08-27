@@ -15,8 +15,10 @@ public class GenerateProperties {
     private boolean print;
     private boolean withPrintDialog;
     private boolean exportToPDF;
+    private boolean showPrintingDialog;
     private Object ObjectModel;
     private String pdfExportPath;
+    private String pdfFileName;
     
 
     public boolean isShow() {
@@ -65,5 +67,21 @@ public class GenerateProperties {
 
     public void setExportToPDF(boolean exportToPDF) {
         this.exportToPDF = exportToPDF;
-    }        
+    }
+
+    public String getPdfFileName() {
+        return pdfFileName;
+    }
+
+    public void setPdfFileName(String pdfFileName) {
+        this.pdfFileName = pdfFileName;
+    }
+
+    public boolean isShowPrintingDialog() {
+        return showPrintingDialog;
+    }
+
+    public void setShowPrintingDialog(boolean showPrintingDialog) {
+        this.showPrintingDialog = showPrintingDialog;
+    }
 }

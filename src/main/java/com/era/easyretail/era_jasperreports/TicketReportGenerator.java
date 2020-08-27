@@ -17,15 +17,16 @@ import java.util.Map;
  */
 public class TicketReportGenerator extends BaseReportGenerator {
 
-    private TicketReportModel TicketReportModel;
-    
     @Override
     public String getReportName(){
         return "rptTickVta";
-    }
+    }        
     
     @Override
     public Map<String, String> getMap() {
+        
+        //Cast model
+        final TicketReportModel TicketReportModel = (TicketReportModel)BaseReport;
         
         Map <String,String> params = new HashMap<>();
         

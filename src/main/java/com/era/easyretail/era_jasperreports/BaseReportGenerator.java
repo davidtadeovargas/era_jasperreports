@@ -30,9 +30,15 @@ public abstract class BaseReportGenerator {
     
     protected boolean localCompanyParams;
     
+    protected BaseReport BaseReport;
+    
     public abstract Map<String,String> getMap();
     public abstract String getReportName();
     public abstract Connection getConnection() throws Exception;
+
+    public void setBaseReport(BaseReport BaseReport) {
+        this.BaseReport = BaseReport;
+    }        
     
     final public void generate(final GenerateProperties GenerateProperties) throws Exception{
                 
@@ -81,7 +87,7 @@ public abstract class BaseReportGenerator {
         //Logo        
         //params.put("LOGNOM", TicketReportModel);
         
-        JasperPrint  pr = JasperFillManager.fillReport(ja, (Map)getMap(), getConnection());
+        JasperPrint pr = JasperFillManager.fillReport(ja, (Map)getMap(), getConnection());
         
         //If has to show the PDF file
         if(GenerateProperties.isShow()){
@@ -93,12 +99,12 @@ public abstract class BaseReportGenerator {
         
         //If has to print the PDF file
         if(GenerateProperties.isPrint()){
-            JasperPrintManager.printReport(pr,GenerateProperties.isPrint());
+            JasperPrintManager.printReport(pr,GenerateProperties.isShowPrintingDialog());
         }
         
         //If has to export the PDF file
         if(GenerateProperties.isExportToPDF()){
-            JasperExportManager.exportReportToPdfFile(pr, GenerateProperties.getPdfExportPath());
+            JasperExportManager.exportReportToPdfFile(pr, GenerateProperties.getPdfExportPath() + "\\" + GenerateProperties.getPdfFileName() + ".pdf");
         }
     }
 }
