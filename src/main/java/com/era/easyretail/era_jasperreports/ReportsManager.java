@@ -23,4 +23,7 @@ public class ReportsManager {
     public TicketReportGenerator getTicketReportGenerator(){
         return new TicketReportGenerator();
     }
+    public TestReportGenerator getTestReportGenerator(){
+        return new TestReportGenerator();
+    }
 }

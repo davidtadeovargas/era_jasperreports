@@ -31,25 +31,26 @@ public class TicketReportGenerator extends BaseReportGenerator {
         Map <String,String> params = new HashMap<>();
         
         params.put("CODTIK", TicketReportModel.getConsecutive());
-        params.put("VTA", TicketReportModel.getSaleID());
-        params.put("SUBTOT", TicketReportModel.getSubtotal());
-        params.put("IMPUE", TicketReportModel.getTax());
+        params.put("VTA", TicketReportModel.getSaleID());        
         params.put("FDOC", TicketReportModel.getDocumentDate());
         params.put("NOMEMP", TicketReportModel.getCompanyName());
-        params.put("TEL", TicketReportModel.getPhone());
-        params.put("CALL", TicketReportModel.getStreet());
-        params.put("COL", TicketReportModel.getColony());
-        params.put("CP", TicketReportModel.getPostalCode());
-        params.put("NOEXT", TicketReportModel.getExternalNumber());
-        params.put("NOINT", TicketReportModel.getInternalNumber());
+        params.put("TEL", TicketReportModel.getPhone()==null?"":TicketReportModel.getPhone());
+        params.put("CALL", TicketReportModel.getStreet()==null?"":TicketReportModel.getStreet());
+        params.put("COL", TicketReportModel.getColony()==null?"":TicketReportModel.getColony());
+        params.put("CP", TicketReportModel.getPostalCode()==null?"":TicketReportModel.getPostalCode());
+        params.put("NOEXT", TicketReportModel.getExternalNumber()==null?"":TicketReportModel.getExternalNumber());
+        params.put("NOINT", TicketReportModel.getInternalNumber()==null?"":TicketReportModel.getInternalNumber());
         params.put("MON", TicketReportModel.getCoin());
-        params.put("CIU", TicketReportModel.getCity());
-        params.put("ESTAD", TicketReportModel.getEstate());
+        params.put("CIU", TicketReportModel.getCity()==null?"":TicketReportModel.getCity());
+        params.put("ESTAD", TicketReportModel.getEstate()==null?"":TicketReportModel.getEstate());
         params.put("RFC", TicketReportModel.getRFC());
         params.put("IMPLET", TicketReportModel.getImportWords());
+        params.put("SUBTOT", TicketReportModel.getSubtotal());
+        params.put("IMPUE", TicketReportModel.getTax());
+        params.put("TOTDESCU", TicketReportModel.getDisccount());
         params.put("TOT", TicketReportModel.getTotal());        
         params.put("WEB", TicketReportModel.getWebPage());
-
+        
         return params;
     }
 

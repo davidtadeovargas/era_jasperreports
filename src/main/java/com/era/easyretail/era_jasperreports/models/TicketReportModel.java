@@ -30,8 +30,17 @@ public class TicketReportModel extends BaseReport {
     String webPage;
     String importWords;
     String subtotal;
-    String tax;    
+    String tax; 
+    String disccount;
 
+    public String getDisccount() {
+        return disccount;
+    }
+
+    public void setDisccount(String disccount) {
+        this.disccount = disccount;
+    }
+    
     public String getConsecutive() {
         return consecutive;
     }

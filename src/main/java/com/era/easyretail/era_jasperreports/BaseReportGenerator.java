@@ -46,7 +46,7 @@ public abstract class BaseReportGenerator {
         final InputStream reportStream = BaseReport.class.getClassLoader().getResourceAsStream(report);
         JasperReport ja = JasperCompileManager.compileReport(reportStream);
         
-        Map <String,String> params = new HashMap<>();
+        Map <String,String> params = this.getMap();
         
         if(localCompanyParams){
         
@@ -84,10 +84,12 @@ public abstract class BaseReportGenerator {
         
         params.put("USER", User.getCode());
         
-        //Logo        
-        //params.put("LOGNOM", TicketReportModel);
+        final String logoPath = UtilitiesFactory.getSingleton().getImagesUtility().getCompanyLogoImagePath();
+        if(UtilitiesFactory.getSingleton().getFilesUtility().fileExists(logoPath)){
+            params.put("LOG", UtilitiesFactory.getSingleton().getImagesUtility().getCompanyLogoImagePath());
+        }
         
-        JasperPrint pr = JasperFillManager.fillReport(ja, (Map)getMap(), getConnection());
+        JasperPrint pr = JasperFillManager.fillReport(ja, (Map)params, getConnection());
         
         //If has to show the PDF file
         if(GenerateProperties.isShow()){
@@ -106,5 +108,9 @@ public abstract class BaseReportGenerator {
         if(GenerateProperties.isExportToPDF()){
             JasperExportManager.exportReportToPdfFile(pr, GenerateProperties.getPdfExportPath() + "\\" + GenerateProperties.getPdfFileName() + ".pdf");
         }
+    }
+
+    public void setLocalCompanyParams(boolean localCompanyParams) {
+        this.localCompanyParams = localCompanyParams;
     }
 }
