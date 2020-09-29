@@ -2,8 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="9704ac55-57bb-4424-9622-f93114b4b088">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="163"/>
-	<property name="ireport.y" value="145"/>
-	<parameter name="idempresa" class="java.lang.String"/>
+	<property name="ireport.y" value="145"/>	
 	<parameter name="COD_EMPRESA" class="java.lang.String"/>
 	<parameter name="FDOC" class="java.lang.String"/>
 	<parameter name="NOMEMP" class="java.lang.String"/>
@@ -57,17 +56,10 @@
 	<queryString>
 		<![CDATA[SELECT total_retencion, total_traslado, DATE(fent) fentrega, vtas.SUBTOT subtotal, vtas.metpag,
 vtas.IMPUE, vtas.TOT total, totdescu, partvta.prod, SUM(cant) AS cantidad, partvta.unid unidad, 
-partvta.descrip AS descripcionProd,totdescu tdescuento, SUM(impo) AS importe, pre precio, vtas.usocfdi, c_ClaveUnidad,
-c_metodopago.Descripcion AS metPagDesc, c_formapago.Descripcion AS formPagDesc, prods.clavesat, 
-c_usocfdi.Descripcion AS cfdiDesc, c_claveprodserv.Descripcion AS prodDescrip
+partvta.descrip AS descripcionProd,totdescu tdescuento, SUM(impo) AS importe, pre precio, vtas.usocfdi, 
+prods.clavesat 
 FROM partvta LEFT JOIN vtas ON vtas.VTA = partvta.VTA 
-LEFT OUTER JOIN emps ON vtas.CODEMP = emps.codigo AND emps.IDEMPRESA = vtas.IDEMPRESA
-LEFT OUTER JOIN c_usocfdi ON c_UsoCFDI = vtas.usocfdi 
-LEFT OUTER JOIN c_claveunidad ON Nombre = partvta.unid
-LEFT OUTER JOIN c_formapago ON c_FormaPago = vtas.metpag
-LEFT OUTER JOIN c_metodopago ON c_MetodoPago = '$P!{FORMPAG}'
-LEFT OUTER JOIN prods ON prods.prod = partvta.prod AND prods.idempresa = vtas.IDEMPRESA 
-LEFT OUTER JOIN c_claveprodserv ON c_ClaveProdServ = prods.clavesat 
+LEFT OUTER JOIN prods ON prods.code = partvta.prod
 WHERE kitmae = 0 AND partvta.VTA = $P!{VTA} GROUP BY prod, partvta.unid, partvta.descrip, pre, impo, cant
 ORDER BY partvta.id_id ASC;]]>
 	</queryString>
@@ -107,16 +99,9 @@ ORDER BY partvta.id_id ASC;]]>
 	<field name="usocfdi" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="c_ClaveUnidad" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="metPagDesc" class="java.lang.String"/>
-	<field name="formPagDesc" class="java.lang.String"/>
 	<field name="clavesat" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="cfdiDesc" class="java.lang.String"/>
-	<field name="prodDescrip" class="java.lang.String"/>
+	</field>		
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -237,8 +222,7 @@ ORDER BY partvta.id_id ASC;]]>
 				<reportElement x="465" y="191" width="91" height="19" uuid="55cebc47-e2f9-4a41-9628-173889143c2d"/>
 				<textElement>
 					<font size="7" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{metpag} + " - " + $F{formPagDesc}]]></textFieldExpression>
+				</textElement>				
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="465" y="210" width="91" height="13" uuid="b889e1a2-88e5-4b85-8290-e8089cc134d4"/>
@@ -384,15 +368,13 @@ ORDER BY partvta.id_id ASC;]]>
 				<reportElement x="419" y="172" width="137" height="18" forecolor="#000000" uuid="3af00664-f9a3-4a34-8576-4a8b87378a35"/>
 				<textElement>
 					<font size="7" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{FORMPAG} + " - " + $F{metPagDesc}]]></textFieldExpression>
+				</textElement>				
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="RelativeToTallestObject" x="250" y="191" width="150" height="12" uuid="31d47cbd-bb83-4de6-9742-c000b7ca29a6"/>
 				<textElement>
 					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{usocfdi}+" - "+$F{cfdiDesc}]]></textFieldExpression>
+				</textElement>				
 			</textField>
 			<staticText>
 				<reportElement stretchType="RelativeToTallestObject" x="201" y="191" width="49" height="12" forecolor="#000000" uuid="69168383-b6c7-4265-a781-e8e50beb9024"/>
@@ -500,8 +482,7 @@ ORDER BY partvta.id_id ASC;]]>
 				<reportElement stretchType="RelativeToTallestObject" x="205" y="0" width="60" height="13" uuid="7e0785ab-35b0-4151-85e1-588c8da97a95"/>
 				<textElement>
 					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[(($F{c_ClaveUnidad}== null)?"":$F{c_ClaveUnidad}) +" - "+ $F{unidad}]]></textFieldExpression>
+				</textElement>				
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="RelativeToTallestObject" x="265" y="0" width="181" height="13" uuid="ac444960-dce5-4d72-bd27-748629a89901"/>
@@ -535,8 +516,7 @@ ORDER BY partvta.id_id ASC;]]>
 				<reportElement stretchType="RelativeToTallestObject" x="94" y="0" width="111" height="13" uuid="0f75eedc-4905-48fa-aa13-4e101144a05e"/>
 				<textElement>
 					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{clavesat} +  " - " + (($F{prodDescrip} == null)?"":$F{prodDescrip})]]></textFieldExpression>
+				</textElement>				
 			</textField>
 		</band>
 	</detail>
@@ -645,10 +625,6 @@ ORDER BY partvta.id_id ASC;]]>
 			</textField>
 			<image scaleImage="FillFrame">
 				<reportElement x="2" y="206" width="69" height="69" uuid="3065955d-6041-4548-833f-1101e3e35b78"/>
-				<imageExpression><![CDATA[com.google.zxing.client.j2se.MatrixToImageWriter.toBufferedImage(
-     new com.google.zxing.qrcode.QRCodeWriter().encode(
-         $P{QR},
-         com.google.zxing.BarcodeFormat.QR_CODE, 300, 300))]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement stretchType="RelativeToTallestObject" x="73" y="177" width="123" height="13" forecolor="#000000" uuid="5dd91f71-a6e9-432e-b3f9-ddbfaa7b8264"/>

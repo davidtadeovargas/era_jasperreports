@@ -26,4 +26,7 @@ public class ReportsManager {
     public TestReportGenerator getTestReportGenerator(){
         return new TestReportGenerator();
     }
+    public FacReportGenerator getFacReportGenerator(){
+        return new FacReportGenerator();
+    }
 }
