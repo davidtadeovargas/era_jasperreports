@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="9704ac55-57bb-4424-9622-f93114b4b088">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="163"/>
-	<property name="ireport.y" value="145"/>	
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="COD_EMPRESA" class="java.lang.String"/>
 	<parameter name="FDOC" class="java.lang.String"/>
 	<parameter name="NOMEMP" class="java.lang.String"/>
@@ -53,6 +53,11 @@
 	<parameter name="LUGEXP" class="java.lang.String"/>
 	<parameter name="REGFIS" class="java.lang.String"/>
 	<parameter name="CTAPRED" class="java.lang.String"/>
+	<parameter name="USO_CFDI" class="java.lang.String"/>
+	<parameter name="SUBTOT" class="java.lang.String"/>
+	<parameter name="IMPUE" class="java.lang.String"/>
+	<parameter name="TOT" class="java.lang.String"/>
+	<parameter name="DESCU" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT total_retencion, total_traslado, DATE(fent) fentrega, vtas.SUBTOT subtotal, vtas.metpag,
 vtas.IMPUE, vtas.TOT total, totdescu, partvta.prod, SUM(cant) AS cantidad, partvta.unid unidad, 
@@ -101,7 +106,7 @@ ORDER BY partvta.id_id ASC;]]>
 	</field>
 	<field name="clavesat" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>		
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -146,14 +151,14 @@ ORDER BY partvta.id_id ASC;]]>
 				<textElement>
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{COL} + " C.P. " + $P{CP}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{COL} == "" ? "" :($P{COL} + " C.P. " + $P{CP})]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="RelativeToTallestObject" x="7" y="178" width="393" height="13" uuid="5d8a12b0-bbe2-486f-a840-53ceb20cc2c9"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{CIU} + ", " + $P{ESTAD} + " " + $P{PAI}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{CIU} == "" ? "" : $P{CIU} + ", " + $P{ESTAD} + " " + $P{PAI}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="RelativeToTallestObject" x="26" y="142" width="374" height="13" uuid="a990f021-120a-4e55-b4af-9e284fd37dbf"/>
@@ -222,7 +227,8 @@ ORDER BY partvta.id_id ASC;]]>
 				<reportElement x="465" y="191" width="91" height="19" uuid="55cebc47-e2f9-4a41-9628-173889143c2d"/>
 				<textElement>
 					<font size="7" isBold="false"/>
-				</textElement>				
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FORMPAG}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="465" y="210" width="91" height="13" uuid="b889e1a2-88e5-4b85-8290-e8089cc134d4"/>
@@ -368,13 +374,15 @@ ORDER BY partvta.id_id ASC;]]>
 				<reportElement x="419" y="172" width="137" height="18" forecolor="#000000" uuid="3af00664-f9a3-4a34-8576-4a8b87378a35"/>
 				<textElement>
 					<font size="7" isBold="false"/>
-				</textElement>				
+				</textElement>
+				<textFieldExpression><![CDATA[$P{METPAG}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="RelativeToTallestObject" x="250" y="191" width="150" height="12" uuid="31d47cbd-bb83-4de6-9742-c000b7ca29a6"/>
 				<textElement>
 					<font size="8"/>
-				</textElement>				
+				</textElement>
+				<textFieldExpression><![CDATA[$P{USO_CFDI}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement stretchType="RelativeToTallestObject" x="201" y="191" width="49" height="12" forecolor="#000000" uuid="69168383-b6c7-4265-a781-e8e50beb9024"/>
@@ -482,7 +490,8 @@ ORDER BY partvta.id_id ASC;]]>
 				<reportElement stretchType="RelativeToTallestObject" x="205" y="0" width="60" height="13" uuid="7e0785ab-35b0-4151-85e1-588c8da97a95"/>
 				<textElement>
 					<font size="8"/>
-				</textElement>				
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unidad}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="RelativeToTallestObject" x="265" y="0" width="181" height="13" uuid="ac444960-dce5-4d72-bd27-748629a89901"/>
@@ -516,7 +525,7 @@ ORDER BY partvta.id_id ASC;]]>
 				<reportElement stretchType="RelativeToTallestObject" x="94" y="0" width="111" height="13" uuid="0f75eedc-4905-48fa-aa13-4e101144a05e"/>
 				<textElement>
 					<font size="8"/>
-				</textElement>				
+				</textElement>
 			</textField>
 		</band>
 	</detail>
@@ -596,7 +605,7 @@ ORDER BY partvta.id_id ASC;]]>
 				<textFieldExpression><![CDATA[$P{DOMENT}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToTallestObject" x="2" y="141" width="551" height="36" uuid="7f118f52-c046-4343-ba3f-d465e98334cf"/>
+				<reportElement stretchType="RelativeToTallestObject" x="2" y="141" width="551" height="24" uuid="7f118f52-c046-4343-ba3f-d465e98334cf"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
@@ -607,69 +616,73 @@ ORDER BY partvta.id_id ASC;]]>
 				<textElement textAlignment="Right">
 					<font size="8" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{subtotal}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{SUBTOT}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="451" y="101" width="98" height="14" uuid="4e971feb-adca-43d9-a7a8-4b686f65a59c"/>
 				<textElement textAlignment="Right">
 					<font size="8" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{total_traslado}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{IMPUE}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="451" y="128" width="98" height="13" uuid="56ea8065-3697-4b67-843a-ea9630dc0495"/>
 				<textElement textAlignment="Right">
 					<font size="8" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{TOT}]]></textFieldExpression>
 			</textField>
 			<image scaleImage="FillFrame">
 				<reportElement x="2" y="206" width="69" height="69" uuid="3065955d-6041-4548-833f-1101e3e35b78"/>
+				<imageExpression><![CDATA[com.google.zxing.client.j2se.MatrixToImageWriter.toBufferedImage(
+     new com.google.zxing.qrcode.QRCodeWriter().encode(
+         $P{QR},
+         com.google.zxing.BarcodeFormat.QR_CODE, 300, 300))]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement stretchType="RelativeToTallestObject" x="73" y="177" width="123" height="13" forecolor="#000000" uuid="5dd91f71-a6e9-432e-b3f9-ddbfaa7b8264"/>
+				<reportElement stretchType="RelativeToTallestObject" x="73" y="167" width="123" height="13" forecolor="#000000" uuid="5dd91f71-a6e9-432e-b3f9-ddbfaa7b8264"/>
 				<textElement>
 					<font size="6" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Sello digital emisor:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToTallestObject" x="73" y="215" width="123" height="13" forecolor="#000000" uuid="e1340b9d-9a8f-4ad0-9d41-15cec84b42fe"/>
+				<reportElement stretchType="RelativeToTallestObject" x="73" y="218" width="123" height="13" forecolor="#000000" uuid="e1340b9d-9a8f-4ad0-9d41-15cec84b42fe"/>
 				<textElement>
 					<font size="6" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Sello digital del SAT:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToTallestObject" x="73" y="249" width="479" height="13" forecolor="#000000" uuid="789fb757-08c0-4dae-b9f9-58586c63209c"/>
+				<reportElement stretchType="RelativeToTallestObject" x="73" y="258" width="479" height="13" forecolor="#000000" uuid="789fb757-08c0-4dae-b9f9-58586c63209c"/>
 				<textElement>
 					<font size="6" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Cadena original del complemento de certificación digital del SAT:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="73" y="189" width="480" height="21" uuid="3414635f-94cb-44de-bb00-e9a02884f7da"/>
+				<reportElement x="73" y="179" width="480" height="39" uuid="3414635f-94cb-44de-bb00-e9a02884f7da"/>
 				<textElement>
 					<font size="6"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{SELL}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="73" y="228" width="480" height="16" uuid="f4be9f12-0a0c-4c08-8aa4-94a50dd58f36"/>
+				<reportElement x="73" y="231" width="480" height="27" uuid="f4be9f12-0a0c-4c08-8aa4-94a50dd58f36"/>
 				<textElement>
 					<font size="6"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{SELLSAT}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="73" y="262" width="479" height="30" uuid="e402a8ee-c5d0-4ec0-b778-2071e6ee8fd9"/>
+				<reportElement x="73" y="272" width="479" height="30" uuid="e402a8ee-c5d0-4ec0-b778-2071e6ee8fd9"/>
 				<textElement>
 					<font size="6"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{CADORI}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement stretchType="RelativeToTallestObject" x="73" y="291" width="195" height="13" forecolor="#000000" uuid="0cb1c481-4cbd-4490-a503-c5ce9f220381"/>
+				<reportElement stretchType="RelativeToTallestObject" x="73" y="306" width="195" height="13" forecolor="#000000" uuid="0cb1c481-4cbd-4490-a503-c5ce9f220381"/>
 				<textElement>
 					<font size="6" isBold="false"/>
 				</textElement>
@@ -701,7 +714,7 @@ ORDER BY partvta.id_id ASC;]]>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{tdescuento}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{DESCU}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

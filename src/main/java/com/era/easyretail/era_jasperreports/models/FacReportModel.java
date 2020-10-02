@@ -29,6 +29,7 @@ public class FacReportModel extends BaseReport {
     private String estad;
     private String rfc;
     private String corr;
+    private String usoCfdi;
     private String implet;
     private String subtotal;
     private String impue;
@@ -49,6 +50,7 @@ public class FacReportModel extends BaseReport {
     private String certsat;
     private String vendedor;
     private String importWords;
+    private String qr;
     
 
     public String getConsfac() {
@@ -354,4 +356,20 @@ public class FacReportModel extends BaseReport {
     public void setWebPage(String webPage) {
         this.webPage = webPage;
     }
+
+    public String getQr() {
+        return qr;
+    }
+
+    public String getUsoCfdi() {
+        return usoCfdi;
+    }
+
+    public void setUsoCfdi(String usoCfdi) {
+        this.usoCfdi = usoCfdi;
+    }
+    
+    public void setQr(String qr) {
+        this.qr = qr;
+    }        
 }
