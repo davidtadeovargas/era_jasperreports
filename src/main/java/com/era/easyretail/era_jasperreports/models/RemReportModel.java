@@ -9,13 +9,12 @@ package com.era.easyretail.era_jasperreports.models;
  *
  * @author PC
  */
-public class FacReportModel extends BaseReport {
+public class RemReportModel extends BaseReport {
     
-    private String consfac;
+    private String noreference;
     private String observaciones;
     private String vta;
     private String ser;
-    private String totalRetention;
     private String fdoc;
     private String nomemp;
     private String tel;
@@ -29,8 +28,7 @@ public class FacReportModel extends BaseReport {
     private String mon;
     private String estad;
     private String rfc;
-    private String corr;
-    private String usoCfdi;
+    private String corr;    
     private String implet;
     private String subtotal;
     private String impue;
@@ -38,28 +36,17 @@ public class FacReportModel extends BaseReport {
     private String tot;
     private String metopag;
     private String webPage;
-    private String cta;
     private String formpag;
     private String doment;
-    private String sell;
-    private String sellsat;
-    private String cadori;
-    private String folfisc;
-    private String lugexp;
-    private String regfis;
-    private String ctapred;
-    private String certsat;
     private String vendedor;
-    private String importWords;
-    private String qr;
-    
+    private String importWords;    
 
-    public String getConsfac() {
-        return consfac;
+    public String getNoreference() {
+        return noreference;
     }
 
-    public void setConsfac(String consfac) {
-        this.consfac = consfac;
+    public void setNoreference(String noreference) {
+        this.noreference = noreference;
     }
 
     public String getObservaciones() {
@@ -222,6 +209,14 @@ public class FacReportModel extends BaseReport {
         this.impue = impue;
     }
 
+    public String getDescu() {
+        return descu;
+    }
+
+    public void setDescu(String descu) {
+        this.descu = descu;
+    }
+
     public String getTot() {
         return tot;
     }
@@ -238,12 +233,12 @@ public class FacReportModel extends BaseReport {
         this.metopag = metopag;
     }
 
-    public String getCta() {
-        return cta;
+    public String getWebPage() {
+        return webPage;
     }
 
-    public void setCta(String cta) {
-        this.cta = cta;
+    public void setWebPage(String webPage) {
+        this.webPage = webPage;
     }
 
     public String getFormpag() {
@@ -262,70 +257,6 @@ public class FacReportModel extends BaseReport {
         this.doment = doment;
     }
 
-    public String getSell() {
-        return sell;
-    }
-
-    public void setSell(String sell) {
-        this.sell = sell;
-    }
-
-    public String getSellsat() {
-        return sellsat;
-    }
-
-    public void setSellsat(String sellsat) {
-        this.sellsat = sellsat;
-    }
-
-    public String getCadori() {
-        return cadori;
-    }
-
-    public void setCadori(String cadori) {
-        this.cadori = cadori;
-    }
-
-    public String getFolfisc() {
-        return folfisc;
-    }
-
-    public void setFolfisc(String folfisc) {
-        this.folfisc = folfisc;
-    }
-
-    public String getLugexp() {
-        return lugexp;
-    }
-
-    public void setLugexp(String lugexp) {
-        this.lugexp = lugexp;
-    }
-
-    public String getRegfis() {
-        return regfis;
-    }
-
-    public void setRegfis(String regfis) {
-        this.regfis = regfis;
-    }
-
-    public String getCtapred() {
-        return ctapred;
-    }
-
-    public void setCtapred(String ctapred) {
-        this.ctapred = ctapred;
-    }
-
-    public String getCertsat() {
-        return certsat;
-    }
-
-    public void setCertsat(String certsat) {
-        this.certsat = certsat;
-    }
-
     public String getVendedor() {
         return vendedor;
     }
@@ -340,45 +271,5 @@ public class FacReportModel extends BaseReport {
 
     public void setImportWords(String importWords) {
         this.importWords = importWords;
-    }
-
-    public String getDescu() {
-        return descu;
-    }
-
-    public void setDescu(String descu) {
-        this.descu = descu;
-    }
-
-    public String getWebPage() {
-        return webPage;
-    }
-
-    public void setWebPage(String webPage) {
-        this.webPage = webPage;
-    }
-
-    public String getQr() {
-        return qr;
-    }
-
-    public String getUsoCfdi() {
-        return usoCfdi;
-    }
-
-    public void setUsoCfdi(String usoCfdi) {
-        this.usoCfdi = usoCfdi;
-    }
-    
-    public void setQr(String qr) {
-        this.qr = qr;
-    }
-
-    public String getTotalRetention() {
-        return totalRetention;
-    }
-
-    public void setTotalRetention(String totalRetention) {
-        this.totalRetention = totalRetention;
     }
 }

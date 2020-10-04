@@ -12,7 +12,6 @@ import com.era.models.User;
 import com.era.utilities.UtilitiesFactory;
 import java.io.InputStream;
 import java.sql.Connection;
-import java.util.HashMap;
 import java.util.Map;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -84,10 +83,16 @@ public abstract class BaseReportGenerator {
         
         params.put("USER", User.getCode());
         
+        String imagePath;
         final String logoPath = UtilitiesFactory.getSingleton().getImagesUtility().getCompanyLogoImagePath();
         if(UtilitiesFactory.getSingleton().getFilesUtility().fileExists(logoPath)){
-            params.put("LOG", UtilitiesFactory.getSingleton().getImagesUtility().getCompanyLogoImagePath());
+            imagePath = UtilitiesFactory.getSingleton().getImagesUtility().getCompanyLogoImagePath();
         }
+        else{
+            imagePath = UtilitiesFactory.getSingleton().getImagesUtility().getLocalLogoImagePath();
+        }
+        
+        params.put("LOG", imagePath);
         
         JasperPrint pr = JasperFillManager.fillReport(ja, (Map)params, getConnection());
         

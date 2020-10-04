@@ -58,6 +58,7 @@
 	<parameter name="IMPUE" class="java.lang.String"/>
 	<parameter name="TOT" class="java.lang.String"/>
 	<parameter name="DESCU" class="java.lang.String"/>
+	<parameter name="TOT_RETEN" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT total_retencion, total_traslado, DATE(fent) fentrega, vtas.SUBTOT subtotal, vtas.metpag,
 vtas.IMPUE, vtas.TOT total, totdescu, partvta.prod, SUM(cant) AS cantidad, partvta.unid unidad, 
@@ -229,13 +230,6 @@ ORDER BY partvta.id_id ASC;]]>
 					<font size="7" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{FORMPAG}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="465" y="210" width="91" height="13" uuid="b889e1a2-88e5-4b85-8290-e8089cc134d4"/>
-				<textElement verticalAlignment="Middle">
-					<font size="7" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{CTA}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="418" y="102" width="137" height="12" uuid="7544f92c-c4fd-453e-a444-c6218967e5dd"/>
@@ -500,14 +494,14 @@ ORDER BY partvta.id_id ASC;]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{descripcionProd}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0.0000">
+			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00">
 				<reportElement stretchType="RelativeToTallestObject" x="446" y="0" width="65" height="13" uuid="d054c2e6-67fb-458a-a991-ebeedcdbb390"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{precio}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00">
 				<reportElement x="511" y="0" width="55" height="13" uuid="f113f82d-f618-466d-91b3-e68ca494e313"/>
 				<textElement>
 					<font size="8"/>
@@ -526,6 +520,7 @@ ORDER BY partvta.id_id ASC;]]>
 				<textElement>
 					<font size="8"/>
 				</textElement>
+				<textFieldExpression><![CDATA[$F{clavesat}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -693,7 +688,7 @@ ORDER BY partvta.id_id ASC;]]>
 				<textElement textAlignment="Right">
 					<font size="8" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{total_retencion}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{TOT_RETEN}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement stretchType="RelativeToTallestObject" x="382" y="115" width="69" height="13" forecolor="#3333FF" uuid="142647cc-641f-4427-b02e-5cc553a30b8d"/>

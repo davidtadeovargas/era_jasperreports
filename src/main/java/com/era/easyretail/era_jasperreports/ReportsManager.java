@@ -29,4 +29,7 @@ public class ReportsManager {
     public FacReportGenerator getFacReportGenerator(){
         return new FacReportGenerator();
     }
+    public RemisionReportGenerator getRemisionReportGenerator(){
+        return new RemisionReportGenerator();
+    }
 }

@@ -51,6 +51,7 @@ public class FacReportGenerator extends BaseReportGenerator {
         params.put("IMPLET", facReportModel.getImportWords());
         params.put("SUBTOT", facReportModel.getSubtotal());
         params.put("IMPUE", facReportModel.getImpue());
+        params.put("TOT_RETEN", facReportModel.getTotalRetention());
         params.put("DESCU", facReportModel.getDescu());
         params.put("TOT", facReportModel.getTot());
         params.put("METPAG", facReportModel.getMetopag());
