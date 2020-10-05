@@ -5,6 +5,7 @@
  */
 package com.era.easyretail.era_jasperreports;
 
+import com.era.easyretail.era_jasperreports.models.CancelSaleReportModel;
 import com.era.easyretail.era_jasperreports.models.FacReportModel;
 import com.era.easyretail.era_jasperreports.models.GenerateProperties;
 import com.era.easyretail.era_jasperreports.models.RemReportModel;
@@ -12,7 +13,9 @@ import com.era.easyretail.era_jasperreports.models.TicketReportModel;
 import com.era.models.BasDats;
 import com.era.models.Company;
 import com.era.models.Sales;
+import com.era.utilities.DialogPropertiesUitlity;
 import com.era.utilities.UtilitiesFactory;
+import java.util.Date;
 
 /**
  *
@@ -87,6 +90,28 @@ public class ReportManager {
         TicketReportGenerator.setLocalCompanyParams(true);
         TicketReportGenerator.setBaseReport(TicketReportModel);
         TicketReportGenerator.generate(GenerateProperties);
+    }
+    
+    public void generateProductsDownMinPDF() throws Exception {
+        
+        //Create the report properties
+        GenerateProperties GenerateProperties = new GenerateProperties();        
+        GenerateProperties.setShow(true);
+
+        //Generate te report
+        final ProductsDownMinReportGenerator ProductsDownMinReportGenerator = ReportsManager.getSingleton().getProductsDownMinReportGenerator();
+        ProductsDownMinReportGenerator.generate(GenerateProperties);
+    }
+    
+    public void generateProductsUpMaxPDF() throws Exception {
+        
+        //Create the report properties
+        GenerateProperties GenerateProperties = new GenerateProperties();        
+        GenerateProperties.setShow(true);
+
+        //Generate te report
+        final ProductsUpMaxReportGenerator ProductsUpMaxReportGenerator = ReportsManager.getSingleton().getProductsUpMaxReportGenerator();
+        ProductsUpMaxReportGenerator.generate(GenerateProperties);
     }
     
     public void generateCFDIPDF(final Sales Sale,final Company Company_, final BasDats BasDatsLocal) throws Exception {
@@ -216,5 +241,49 @@ public class ReportManager {
         RemisionReportGenerator.setLocalCompanyParams(true);
         RemisionReportGenerator.setBaseReport(RemReportModel);
         RemisionReportGenerator.generate(GenerateProperties);
+    }
+    
+    public void generateCancelSalePDF(final Sales Sale,final Company Company_, final boolean showPDF) throws Exception {
+        
+        final String subtotalFormat = UtilitiesFactory.getSingleton().getNumbersUtility().toMoneyFormat(String.valueOf(Sale.getSubtotal().doubleValue()));
+        final String taxesFormat = UtilitiesFactory.getSingleton().getNumbersUtility().toMoneyFormat(String.valueOf(Sale.getTax().doubleValue()));
+        final String totalFormat = UtilitiesFactory.getSingleton().getNumbersUtility().toMoneyFormat(String.valueOf(Sale.getTotal().doubleValue()));
+        
+        //Crete the report model
+        final CancelSaleReportModel CancelSaleReportModel = new CancelSaleReportModel();
+        CancelSaleReportModel.setVta(String.valueOf(Sale.getId()));
+        CancelSaleReportModel.setReferenceNumber(Sale.getReferenceNumber());
+        CancelSaleReportModel.setSerie(Sale.getSerie());
+        CancelSaleReportModel.setDocumentType(Sale.getDocumentType());
+        CancelSaleReportModel.setCompanyCode(Sale.getCompanyCode());
+        CancelSaleReportModel.setCompanyName(Company_.getNom());
+        CancelSaleReportModel.setEmisionDate(Sale.getEmisionDate().toString());
+        CancelSaleReportModel.setCancelDate(new Date().toString());
+        CancelSaleReportModel.setSubtotal(subtotalFormat);
+        CancelSaleReportModel.setTaxes(taxesFormat);
+        CancelSaleReportModel.setTotal(totalFormat);
+        
+        final String title = DialogPropertiesUitlity.getSingleton().getString("sale_cancelation");
+        
+        CancelSaleReportModel.setTitle(title);
+
+        //Create the report properties
+        GenerateProperties GenerateProperties = new GenerateProperties();
+        GenerateProperties.setObjectModel(CancelSaleReportModel);
+        GenerateProperties.setShow(showPDF);
+        GenerateProperties.setExportToPDF(true);
+        GenerateProperties.setPdfExportPath(UtilitiesFactory.getSingleton().getImagesUtility().getCancelsPath());
+        GenerateProperties.setPdfFileName("CAN-" + Company_.getRFC() + "-" + Sale.getSerie() + "-" + Sale.getReferenceNumber());
+
+        //Change the printer
+        if(UtilitiesFactory.getSingleton().getPrintersUtility().userInvoicePrinterExists()){
+            UtilitiesFactory.getSingleton().getPrintersUtility().changeDefaultUserInvoicePrinter();
+        }
+
+        //Generate te report
+        final CancelSaleReportGenerator CancelSaleReportGenerator = ReportsManager.getSingleton().getCancelSaleReportGenerator();
+        CancelSaleReportGenerator.setLocalCompanyParams(true);
+        CancelSaleReportGenerator.setBaseReport(CancelSaleReportModel);
+        CancelSaleReportGenerator.generate(GenerateProperties);
     }
 }

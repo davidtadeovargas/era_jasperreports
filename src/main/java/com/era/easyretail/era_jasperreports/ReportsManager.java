@@ -19,7 +19,13 @@ public class ReportsManager {
         }
         return ReportsManager;
     }
-    
+        
+    public ProductsDownMinReportGenerator getProductsDownMinReportGenerator(){
+        return new ProductsDownMinReportGenerator();
+    }
+    public ProductsUpMaxReportGenerator getProductsUpMaxReportGenerator(){
+        return new ProductsUpMaxReportGenerator();
+    }
     public TicketReportGenerator getTicketReportGenerator(){
         return new TicketReportGenerator();
     }
@@ -32,4 +38,7 @@ public class ReportsManager {
     public RemisionReportGenerator getRemisionReportGenerator(){
         return new RemisionReportGenerator();
     }
+    public CancelSaleReportGenerator getCancelSaleReportGenerator(){
+        return new CancelSaleReportGenerator();
+    }   
 }

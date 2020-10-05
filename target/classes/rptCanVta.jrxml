@@ -168,13 +168,6 @@
 				<textFieldExpression><![CDATA[$P{NOM}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement stretchType="RelativeToTallestObject" x="53" y="141" width="114" height="20" uuid="4c58ee42-80e7-4cba-9b55-73a4ed23d5af"/>
-				<textElement>
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{SER}]]></textFieldExpression>
-			</textField>
-			<textField>
 				<reportElement stretchType="RelativeToTallestObject" x="0" y="121" width="167" height="20" uuid="71e90752-1828-423d-8ca2-d2473b99be35"/>
 				<textElement>
 					<font size="9"/>
