@@ -3,18 +3,24 @@
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-        <parameter name="idempresa" class="java.lang.String"/>
+	<parameter name="idempresa" class="java.lang.String"/>
 	<parameter name="LOG" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT * FROM almas WHERE idempresa = $P{idempresa} AND alma <> '-' ORDER BY id_id ASC]]>
+		<![CDATA[SELECT * FROM almas ORDER BY id_id ASC]]>
 	</queryString>
 	<field name="id_id" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="alma" class="java.lang.String">
+	<field name="dir1" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="respon" class="java.lang.String">
+	<field name="dir2" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dir3" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="code" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="almadescrip" class="java.lang.String">
@@ -23,19 +29,19 @@
 	<field name="estac" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="sucu" class="java.lang.String">
+	<field name="falt" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fmod" class="java.sql.Timestamp">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="nocaj" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="export" class="java.lang.Integer">
+	<field name="respon" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="falt" class="java.sql.Timestamp">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="fmod" class="java.sql.Timestamp">
+	<field name="sucu" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<variable name="QTY" class="java.lang.Integer" calculation="Count">
@@ -125,7 +131,7 @@
 				<textElement>
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{alma}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{code}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="RelativeToTallestObject" x="57" y="0" width="133" height="14" uuid="32dba616-3851-49fe-b32f-8f7a94c2f6fc"/>

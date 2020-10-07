@@ -6,6 +6,7 @@
 package com.era.easyretail.era_jasperreports;
 
 import com.era.easyretail.era_jasperreports.models.CancelSaleReportModel;
+import com.era.easyretail.era_jasperreports.models.CustomerReportModel;
 import com.era.easyretail.era_jasperreports.models.FacReportModel;
 import com.era.easyretail.era_jasperreports.models.GenerateProperties;
 import com.era.easyretail.era_jasperreports.models.RemReportModel;
@@ -101,6 +102,46 @@ public class ReportManager {
         //Generate te report
         final ProductsDownMinReportGenerator ProductsDownMinReportGenerator = ReportsManager.getSingleton().getProductsDownMinReportGenerator();
         ProductsDownMinReportGenerator.generate(GenerateProperties);
+    }        
+            
+    public void generateWarehousesPDF() throws Exception {
+        
+        //Create the report properties
+        GenerateProperties GenerateProperties = new GenerateProperties();        
+        GenerateProperties.setShow(true);
+
+        //Generate te report
+        final WarehousesReportGenerator WarehousesReportGenerator = ReportsManager.getSingleton().getWarehousesReportGenerator();
+        WarehousesReportGenerator.generate(GenerateProperties);
+    }
+    
+    public void generateAllCustomersPDF() throws Exception {
+        
+        final CustomerReportModel CustomerReportModel = new CustomerReportModel();
+        CustomerReportModel.setCustomer("");
+        
+        //Create the report properties
+        GenerateProperties GenerateProperties = new GenerateProperties();        
+        GenerateProperties.setShow(true);
+
+        //Generate te report
+        final CustomerReportGenerator CustomerReportGenerator = ReportsManager.getSingleton().getCustomerReportGenerator();        
+        CustomerReportGenerator.setBaseReport(CustomerReportModel);
+        CustomerReportGenerator.generate(GenerateProperties);
+    }
+    public void generateCustomersPDF(final String customerCode) throws Exception {
+        
+        final CustomerReportModel CustomerReportModel = new CustomerReportModel();
+        CustomerReportModel.setCustomer(customerCode);
+        
+        //Create the report properties
+        GenerateProperties GenerateProperties = new GenerateProperties();        
+        GenerateProperties.setShow(true);                
+        
+        //Generate te report
+        final CustomerReportGenerator CustomerReportGenerator = ReportsManager.getSingleton().getCustomerReportGenerator();
+        CustomerReportGenerator.setBaseReport(CustomerReportModel);
+        CustomerReportGenerator.generate(GenerateProperties);
     }
     
     public void generateProductsUpMaxPDF() throws Exception {

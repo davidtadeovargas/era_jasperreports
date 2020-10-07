@@ -26,32 +26,29 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT c.totalIni, c.abon,c.carg,IFNULL(c.ser,'') AS SER,c.nom,tmp,IFNULL((totalINI+tmp),0)AS totalFec,c.empre,c.norefer,c.fol,c.falt,c.concep FROM
+		<![CDATA[SELECT c.totalIni, c.abon,c.carg,c.nom,tmp,IFNULL((totalINI+tmp),0)AS totalFec,c.empre,c.norefer,c.fol,c.falt,c.concep FROM
 (SELECT cxc.ABON,cxc.CARG,emps.NOM ,cxc.EMPRE,ROUND(SUM(cxc.CARG) - SUM(cxc.ABON),2)AS tmp,cxc.FALT
-FROM cxc LEFT OUTER JOIN emps ON concat(emps.SER,emps.CODEMP)=cxc.EMPRE
-WHERE cxc.idempresa = $P{idempresa} AND DATE(cxc.FALT) BETWEEN $P{FechaIni}  AND $P{FechaFin}
+FROM cxc LEFT OUTER JOIN emps ON emps.COD=cxc.EMPRE
+WHERE DATE(cxc.FALT) BETWEEN $P{FechaIni}  AND $P{FechaFin}
 GROUP BY cxc.EMPRE)b,
-(SELECT IFNULL(a.totalINI,0)AS totalIni,cxc.ABON,cxc.CARG,cxc.EMPRE,emps.SER,emps.NOM,cxc.NOREFER,cxc.FOL,cxc.FALT,cxc.CONCEP
-FROM cxc LEFT OUTER JOIN emps ON cxc.EMPRE=concat(emps.SER,emps.CODEMP) LEFT OUTER JOIN (SELECT cxc.ABON,cxc.CARG,cxc.EMPRE, ROUND(SUM(cxc.CARG) - SUM(cxc.ABON),2)AS totalINI,cxc.FALT
-FROM cxc LEFT OUTER JOIN emps ON concat(emps.SER,emps.CODEMP)=cxc.EMPRE 
-WHERE cxc.idempresa = $P{idempresa} AND DATE(cxc.FALT) <= $P{FechaIni} GROUP BY cxc.EMPRE ORDER BY FALT)a ON a.empre=cxc.EMPRE WHERE  cxc.FALT BETWEEN $P{FechaIni} AND $P{FechaFin} )c
-WHERE b.empre=c.empre  AND CASE WHEN $P{PROV}='' THEN 1=1 ELSE $P{PROV}=c.empre END AND CASE WHEN $P{SERIE}='' THEN 1=1 ELSE $P{SERIE}=c.SER END   ORDER BY empre, falt]]>
+(SELECT IFNULL(a.totalINI,0)AS totalIni,cxc.ABON,cxc.CARG,cxc.EMPRE,emps.NOM,cxc.NOREFER,cxc.FOL,cxc.FALT,cxc.CONCEP
+FROM cxc LEFT OUTER JOIN emps ON cxc.EMPRE=emps.COD LEFT OUTER JOIN (SELECT cxc.ABON,cxc.CARG,cxc.EMPRE, ROUND(SUM(cxc.CARG) - SUM(cxc.ABON),2)AS totalINI,cxc.FALT
+FROM cxc LEFT OUTER JOIN emps ON emps.COD=cxc.EMPRE 
+WHERE DATE(cxc.FALT) <= $P{FechaIni} GROUP BY cxc.EMPRE ORDER BY FALT)a ON a.empre=cxc.EMPRE WHERE  cxc.FALT BETWEEN $P{FechaIni} AND $P{FechaFin} )c
+WHERE b.empre=c.empre  AND CASE WHEN $P{PROV}='' THEN 1=1 ELSE $P{PROV}=c.empre END ORDER BY empre, falt]]>
 	</queryString>
-	<field name="totalIni" class="java.lang.Double"/>
-	<field name="ABON" class="java.lang.Float">
+	<field name="totalIni" class="java.math.BigDecimal"/>
+	<field name="ABON" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="CARG" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="SER" class="java.lang.String">
+	<field name="CARG" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="NOM" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="tmp" class="java.lang.Double"/>
-	<field name="totalFec" class="java.lang.Double"/>
+	<field name="tmp" class="java.math.BigDecimal"/>
+	<field name="totalFec" class="java.math.BigDecimal"/>
 	<field name="EMPRE" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
@@ -153,10 +150,6 @@ WHERE b.empre=c.empre  AND CASE WHEN $P{PROV}='' THEN 1=1 ELSE $P{PROV}=c.empre 
 					</textElement>
 					<text><![CDATA[Serie:]]></text>
 				</staticText>
-				<textField>
-					<reportElement x="100" y="2" width="455" height="20" uuid="3d70d0eb-5656-4995-a01d-3338b496f779"/>
-					<textFieldExpression><![CDATA[$F{SER}]]></textFieldExpression>
-				</textField>
 			</band>
 		</groupHeader>
 		<groupFooter>

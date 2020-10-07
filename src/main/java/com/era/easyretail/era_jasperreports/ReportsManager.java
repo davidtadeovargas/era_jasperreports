@@ -40,5 +40,11 @@ public class ReportsManager {
     }
     public CancelSaleReportGenerator getCancelSaleReportGenerator(){
         return new CancelSaleReportGenerator();
-    }   
+    }
+    public WarehousesReportGenerator getWarehousesReportGenerator(){
+        return new WarehousesReportGenerator();
+    }
+    public CustomerReportGenerator getCustomerReportGenerator(){
+        return new CustomerReportGenerator();
+    }    
 }
