@@ -10,12 +10,15 @@ import com.era.easyretail.era_jasperreports.models.CustomerReportModel;
 import com.era.easyretail.era_jasperreports.models.FacReportModel;
 import com.era.easyretail.era_jasperreports.models.GenerateProperties;
 import com.era.easyretail.era_jasperreports.models.RemReportModel;
+import com.era.easyretail.era_jasperreports.models.TickPagoReportModel;
 import com.era.easyretail.era_jasperreports.models.TicketReportModel;
 import com.era.models.BasDats;
 import com.era.models.Company;
+import com.era.models.Payment;
 import com.era.models.Sales;
 import com.era.utilities.DialogPropertiesUitlity;
 import com.era.utilities.UtilitiesFactory;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -34,6 +37,37 @@ public class ReportManager {
             ReportManager = new ReportManager();
         }
         return ReportManager;
+    }
+    
+    public void generateTicketPagoPDF(final Payment Payment,final Company Company_, final BigDecimal pending, final BigDecimal totalAboned) throws Exception {
+                
+        //Get import in words
+        final String importInWords = UtilitiesFactory.getSingleton().getNumbersUtility().convertNumberToStringRepresentation(String.valueOf(Payment.getImporte()), null, null, true, true);
+        
+        final String totalFormat = UtilitiesFactory.getSingleton().getNumbersUtility().toMoneyFormat(String.valueOf(totalAboned.doubleValue()));
+        final String pendingFormat = UtilitiesFactory.getSingleton().getNumbersUtility().toMoneyFormat(String.valueOf(pending.doubleValue()));
+        
+        //Crete the report model
+        final TickPagoReportModel TickPagoReportModel = new TickPagoReportModel();
+        TickPagoReportModel.setDocumentDate(Payment.getFalt().toString());
+        TickPagoReportModel.setFolio(Payment.getFolio());
+        TickPagoReportModel.setPending(pendingFormat);
+        TickPagoReportModel.setSerie(Payment.getSerie());
+        TickPagoReportModel.setTotal(totalFormat);
+        TickPagoReportModel.setImportInWords(importInWords);
+        TickPagoReportModel.setCompany(Company_);        
+
+        //Create the report properties
+        GenerateProperties GenerateProperties = new GenerateProperties();
+        GenerateProperties.setObjectModel(TickPagoReportModel);                
+        GenerateProperties.setShow(true);
+
+        //Generate te report
+        final TickPagoReportGenerator TickPagoReportGenerator = ReportsManager.getSingleton().getTickPagoReportGenerator();
+        TickPagoReportGenerator.setLocalCompanyParams(true);
+        TickPagoReportGenerator.setCompanyParams(true);
+        TickPagoReportGenerator.setBaseReport(TickPagoReportModel);
+        TickPagoReportGenerator.generate(GenerateProperties);
     }
     
     public void generateTicketPDF(final Sales Sale,final Company Company_, final BasDats BasDatsLocal) throws Exception {

@@ -8,6 +8,7 @@ package com.era.easyretail.era_jasperreports;
 import com.era.easyretail.era_jasperreports.models.BaseReport;
 import com.era.easyretail.era_jasperreports.models.GenerateProperties;
 import com.era.models.BasDats;
+import com.era.models.Company;
 import com.era.models.User;
 import com.era.utilities.UtilitiesFactory;
 import java.io.InputStream;
@@ -28,6 +29,7 @@ import net.sf.jasperreports.view.JasperViewer;
 public abstract class BaseReportGenerator {
     
     protected boolean localCompanyParams;
+    protected boolean companyParams;
     
     protected BaseReport BaseReport;
     
@@ -79,6 +81,39 @@ public abstract class BaseReportGenerator {
             params.put("MAILLOC", BasDats.getCorr());
         }
         
+        if(this.BaseReport.getImportInWords()!=null){
+            params.put("IMPLET", this.BaseReport.getImportInWords());
+        }            
+        
+        if(companyParams){
+        
+            final Company Company = this.BaseReport.getCompany();
+            
+            String company = Company.getNom();
+            String phone = Company.getTel();
+            String colony = Company.getCol();
+            String street = Company.getCalle();
+            String CP = Company.getCP();
+            String city = Company.getCiu();
+            String estate = Company.getEstad();
+            String country = Company.getPai();
+            String RFC = Company.getRFC();
+            String internalNumber = Company.getNoint();
+            String externalNumber = Company.getNoext();
+            
+            params.put("EMP", company);
+            params.put("TEL", phone);
+            params.put("COL", colony);
+            params.put("CALL", street);
+            params.put("NOINT", internalNumber);
+            params.put("NOEXT", externalNumber);        
+            params.put("CP", CP);
+            params.put("CIU", city);
+            params.put("ESTAD", estate);
+            params.put("PAIC", country);
+            params.put("RFC", RFC);            
+        }
+        
         final User User = UtilitiesFactory.getSingleton().getSessionUtility().getUser();
         
         params.put("USER", User.getCode());
@@ -118,4 +153,8 @@ public abstract class BaseReportGenerator {
     public void setLocalCompanyParams(boolean localCompanyParams) {
         this.localCompanyParams = localCompanyParams;
     }
+
+    public void setCompanyParams(boolean companyParams) {
+        this.companyParams = companyParams;
+    }        
 }

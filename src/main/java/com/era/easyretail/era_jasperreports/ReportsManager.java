@@ -46,5 +46,8 @@ public class ReportsManager {
     }
     public CustomerReportGenerator getCustomerReportGenerator(){
         return new CustomerReportGenerator();
-    }    
+    }
+    public TickPagoReportGenerator getTickPagoReportGenerator(){
+        return new TickPagoReportGenerator();
+    }        
 }
